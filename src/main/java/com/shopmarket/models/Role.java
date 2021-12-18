@@ -7,23 +7,16 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "t_user")
+@Table(name = "t_role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long Id;
 
-    private String title;
+    private String roleName;
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
-
-    enum Roles{
-        ROLE_ADMIN,
-        ROLE_SUPER_ADMIN,
-        ROLE_STAFF,
-        ROLE_USER
-    }
 }
 
