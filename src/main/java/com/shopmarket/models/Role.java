@@ -1,11 +1,14 @@
 package com.shopmarket.models;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "t_role")
 public class Role {
@@ -13,7 +16,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long Id;
 
-    private String roleName;
+    private String name;
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;

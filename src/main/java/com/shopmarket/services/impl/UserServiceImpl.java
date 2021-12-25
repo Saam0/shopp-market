@@ -1,6 +1,6 @@
-/*
 package com.shopmarket.services.impl;
 
+import com.shopmarket.exceptions.UserAlreadyExistException;
 import com.shopmarket.models.Role;
 import com.shopmarket.models.User;
 import com.shopmarket.models.enams.Roles;
@@ -10,10 +10,24 @@ import com.shopmarket.repositories.UserRepository;
 import com.shopmarket.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
+import javax.transaction.Transactional;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
+import javax.xml.validation.Validator;
+
+
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Optional;
+import java.util.Set;
 
+@Service
+@Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
@@ -21,26 +35,32 @@ public class UserServiceImpl implements UserService {
     RoleRepository roleRepository;
     @Autowired
     AddressRepository addressRepository;
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
-    public User save(User user) {
+    public User save(final User user) {
 
-        if (findByEmail(user.getEmail()).isPresent()){
-//            throw new UserAlreadyExistException("There is an account with that email address: " + user.getEmail());
+        if (findUserByEmail(user.getEmail()).isPresent()) {
+            throw new UserAlreadyExistException("There is an account with that email address: " + user.getEmail());
         }
 
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setEnabled(true);
-        user.setDateCreated(new Date());
-        user.setRoles(roleRepository.findByRoleName(Roles.ROLE_USER.toString()));
-        return userRepository.save(user);
-    }
+        final User newUser = new User();
+        newUser.setFirstName(user.getFirstName());
+        newUser.setLastName(user.getLastName());
+        newUser.setDateCreated(user.getDateCreated());
+        newUser.setEmail(user.getEmail());
+        newUser.setGender(user.getGender());
+        newUser.setBirthDate(user.getBirthDate());
+        newUser.setEnabled(user.isEnabled());
+        newUser.setPhoneNumber(user.getPhoneNumber());
+        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        newUser.setRoles(roleRepository.findByName(Roles.ROLE_USER.toString()));
 
-//    private boolean emailExists(String email){
-//        return userRepository.findByEmail(email)!=null;
-//    }
+        System.out.println("service = " + newUser.getPassword() + "; " + newUser.getRoles().toString());
+        System.out.println("service = " + newUser.getPasswordConfirm() + "; " + newUser.getRoles().toString());
+        return userRepository.save(newUser);
+    }
 
 
     @Override
@@ -49,7 +69,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
+    public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
@@ -62,5 +82,10 @@ public class UserServiceImpl implements UserService {
     public boolean deleteUser(Long id) {
         return false;
     }
+
+    @Override
+    public void saveRegisteredUser(User user) {
+
+    }
+
 }
-*/

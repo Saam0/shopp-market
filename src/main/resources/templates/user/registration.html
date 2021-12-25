@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div layout:fragment="content">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <form class="form" action="#" th:action="@{/user/registration}" method="post" th:object="${userForm}">
+                            <!--                    First Name-->
+                            <div class="form-group">
+                                <label class="control-label col-xs-3" for="firstName"
+                                       th:utext="#{label.user.firstName}">First name:</label>
+                                <div class="col-xs-9">
+                                    <input type="text" class="form-control" id="firstName" th:field="*{firstName}"
+                                           required="required">
+                                </div>
+                            </div>
+
+                            <!--                    Last Name-->
+                            <div class="form-group">
+                                <label class="control-label col-xs-3" for="lastName" th:utext="#{label.user.lastName}">Last
+                                    Name:</label>
+                                <div class="col-xs-9">
+                                    <input type="text" class="form-control" id="lastName" th:field="*{lastName}"
+                                           required="required">
+                                </div>
+                            </div>
+
+                            <!--                    phones-->
+                            <div class="form-group">
+                                <label class="control-label col-xs-3" for="phones" th:utext="#{label.user.phoneNumber}">Phone
+                                    number:</label>
+                                <div class="col-xs-9">
+                                    <input type="text" class="form-control" id="phones" th:field="*{phoneNumber}"
+                                           required="required" placeholder="055-203-060">
+                                </div>
+                            </div>
+
+<!--                            &lt;!&ndash;                    country&ndash;&gt;-->
+<!--                            <div class="form-group">-->
+<!--                                <label class="control-label col-xs-3" for="country" th:utext="#{label.user.country}">Country:</label>-->
+<!--                                <div class="col-xs-9">-->
+<!--                                    <input type="text" class="form-control" id="country" name="country"-->
+<!--                                           placeholder="Armenia">-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                            &lt;!&ndash;                    city&ndash;&gt;-->
+<!--                            <div class="form-group">-->
+<!--                                <label class="control-label col-xs-3" for="city"-->
+<!--                                       th:utext="#{label.user.city}">City:</label>-->
+<!--                                <div class="col-xs-9">-->
+<!--                                    <input type="text" class="form-control" id="city" name="city"-->
+<!--                                           placeholder="Yerevan">-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                            &lt;!&ndash;                    address&ndash;&gt;-->
+<!--                            <div class="form-group">-->
+<!--                                <label class="control-label col-xs-3" for="address"-->
+<!--                                       th:utext="#{label.user.addressLine}">Address:</label>-->
+<!--                                <div class="col-xs-9">-->
+<!--                                    <input type="text" class="form-control" id="address" name="address"-->
+<!--                                           placeholder="18/1 Amiryan Street">-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+                            <!--     &lt;!&ndash;                    Date of Birth&ndash;&gt;
+                                 <div class="form-group form-inline ">
+                                     <label class="control-label col-xs-3">Date of Birth:</label>
+                                     <div class="col-xs-3">
+                                         <select class="form-control">
+                                             <option>Day</option>
+                                         </select>
+                                     </div>
+                                     <div class="col-xs-3">
+                                         <select class="form-control">
+                                             <option>Month</option>
+                                         </select>
+                                     </div>
+                                     <div class="col-xs-3">
+                                         <select class="form-control">
+                                             <option>Year</option>
+                                         </select>
+                                     </div>
+                                 </div>
+                    -->
+                            <!--                    Email-->
+                            <div class="form-group">
+                                <label class="control-label col-xs-3" for="inputEmail" th:utext="#{label.user.email}">Email:</label>
+                                <div class="col-xs-9">
+                                    <input type="email" class="form-control" id="inputEmail" th:field="*{email}"
+                                           required="required"
+                                           placeholder="gagik@mail.ru">
+                                </div>
+                            </div>
+
+
+                            <!--                    Password-->
+                            <div class="form-group">
+                                <label class="control-label col-xs-3" for="inputPassword"
+                                       th:utext="#{label.user.password}">Password:</label>
+                                <div class="col-xs-9">
+                                    <input type="password" class="form-control" id="inputPassword"
+                                           th:field="*{password}" required="required">
+                                </div>
+                            </div>
+
+                            <!--                    Confirm password:-->
+                            <div class="form-group">
+                                <label class="control-label col-xs-3" for="confirmPass"
+                                       th:utext="#{label.user.confirmPassword}">Confirm password:</label>
+                                <div class="col-xs-9">
+                                    <input type="password" class="form-control" id="confirmPass" th:field="*{passwordConfirm}"
+                                           required="required">
+                                </div>
+                            </div>
+
+
+                            <!--<div class="form-group">
+                                <label class="control-label col-xs-3" for="phoneNumber">Телефон:</label>
+                                <div class="col-xs-9">
+                                    <input type="tel" class="form-control" id="phoneNumber"
+                                           placeholder="Введите номер телефона">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-3" for="postalAddress">Адрес:</label>
+                                <div class="col-xs-9">
+                                    <textarea rows="3" class="form-control" id="postalAddress"
+                                              placeholder="Введите адрес"></textarea>
+                                </div>
+                            </div>-->
+
+                            <!--                    Gender:-->
+                            <!--   <div class="form-group">
+                                   <label class="control-label col-xs-3">Gender:</label>
+                                   <div class="col-xs-2">
+                                       <label class="radio-inline">
+                                           <input type="radio" name="genderRadios" value="male"> Male
+                                       </label>
+                                   </div>
+                                   <div class="col-xs-2">
+                                       <label class="radio-inline">
+                                           <input type="radio" name="genderRadios" value="female"> Female
+                                       </label>
+                                   </div>
+                               </div>
+                    -->
+                            <div class="form-group">
+                                <div class="col-xs-offset-3 col-xs-9">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value="agree"> I agree with the <a
+                                            href="#">conditions</a>.
+                                    </label>
+                                </div>
+                            </div>
+                            <br/>
+
+                            <div class="form-group">
+                                <div class="col-xs-offset-3 col-xs-9">
+                                    <input type="submit" class="btn btn-primary" value="Submit">
+                                    <input type="reset" class="btn btn-outline-secondary" value="Reset form">
+                                    <a class="btn btn-outline-secondary" th:href="@{/}">Veradardz</a>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

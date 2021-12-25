@@ -9,5 +9,15 @@
       "name": "spring.resources.cache-period",
       "type": "java.lang.String",
       "description": "Description for spring.resources.cache-period."
+    },
+    {
+      "name": "security.basic.enabled",
+      "type": "java.lang.String",
+      "description": "Description for security.basic.enabled."
+    },
+    {
+      "name": "management.security.enabled",
+      "type": "java.lang.String",
+      "description": "Description for management.security.enabled."
     }
   ] }

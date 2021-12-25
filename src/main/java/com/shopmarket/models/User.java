@@ -1,13 +1,25 @@
 package com.shopmarket.models;
 
 
-import lombok.Data;
+import lombok.*;
+import com.shopmarket.validation.PasswordMatches;
+import com.shopmarket.validation.ValidEmail;
+import com.shopmarket.validation.ValidPassword;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.Set;
 
-@Data
+
+
+@PasswordMatches
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+//@Data
 @Entity
 @Table(name = "t_user")
 public class User {
@@ -19,15 +31,24 @@ public class User {
 
     private String LastName;
 
+    @ValidEmail
     private String email;
 
-    private String password;
+
+    private String gender;
+
+    private Date birthDate;
+
 
     private boolean enabled;
 
     private Date dateCreated;
 
+    @NotBlank(message = "{message.phone.notEmpty}")
     private String phoneNumber;
+
+    @ValidPassword
+    private String password;
 
     @Transient
     private String passwordConfirm;
@@ -45,6 +66,15 @@ public class User {
             inverseJoinColumns = {
                     @JoinColumn(name = "role_id")})
     private Set<Role> roles;
+
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = true;
+    }
 
 
 }
