@@ -1,7 +1,10 @@
-<th:block th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<th:block th:fragment="header" >
 
     <!-- Header Section Begin -->
-    <header class="header">
+    <header class="header" >
         <div class="header__top">
             <div class="container">
                 <div class="row">
@@ -31,7 +34,14 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                <th:block sec:authorize="!isAuthenticated()">
+                                <a   href="" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user" ></i> <span th:utext="#{modal.user.login}"></span></a>
+                                <div   th:replace="fragments/login :: login('loginModal')"></div>
+                                </th:block>
+                                <th:block sec:authorize="isAuthenticated()">
+                                    <a   th:href="@{/logout}"  ><i class="fa fa-sign-out" ></i> <span th:utext="#{modal.user.logOut}"></span></a>
+                                </th:block>
+
                             </div>
                         </div>
                     </div>
@@ -107,3 +117,4 @@
     </header>
     <!-- Header Section End -->
 </th:block>
+</html>

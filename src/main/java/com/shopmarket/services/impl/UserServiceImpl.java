@@ -1,7 +1,6 @@
 package com.shopmarket.services.impl;
 
 import com.shopmarket.exceptions.UserAlreadyExistException;
-import com.shopmarket.models.Role;
 import com.shopmarket.models.User;
 import com.shopmarket.models.enams.Roles;
 import com.shopmarket.repositories.AddressRepository;
@@ -9,22 +8,12 @@ import com.shopmarket.repositories.RoleRepository;
 import com.shopmarket.repositories.UserRepository;
 import com.shopmarket.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import javax.transaction.Transactional;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
-import javax.xml.validation.Validator;
-
-
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @Transactional
@@ -45,10 +34,11 @@ public class UserServiceImpl implements UserService {
             throw new UserAlreadyExistException("There is an account with that email address: " + user.getEmail());
         }
 
+
         final User newUser = new User();
         newUser.setFirstName(user.getFirstName());
         newUser.setLastName(user.getLastName());
-        newUser.setDateCreated(user.getDateCreated());
+        newUser.setDateCreated(new Date());
         newUser.setEmail(user.getEmail());
         newUser.setGender(user.getGender());
         newUser.setBirthDate(user.getBirthDate());
@@ -62,11 +52,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(newUser);
     }
 
-
     @Override
     public Optional<User> findById(Long id) {
         return Optional.empty();
     }
+
 
     @Override
     public Optional<User> findUserByEmail(String email) {

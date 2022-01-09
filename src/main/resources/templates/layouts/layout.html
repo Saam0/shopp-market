@@ -9,41 +9,49 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
+    <link th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker.css} " media="screen" rel="stylesheet" type="text/css">
+    <link th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css} " media="screen" rel="stylesheet" type="text/css">
     <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css} " media="screen" rel="stylesheet" type="text/css">
     <link th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css} " media="screen" rel="stylesheet" type="text/css">
     <link th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css} " rel="stylesheet" type="text/css">
     <link th:href="@{/webjars/github-com-paroos-elegant-icons/1.0.0/css/style.css} " rel="stylesheet" type="text/css">
     <link th:href="@{/webjars/jquery-nice-select/1.1.0/css/nice-select.css} " rel="stylesheet" type="text/css">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/slicknav.min.css"  media="screen" rel="stylesheet" type="text/css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.css"  media="screen" rel="stylesheet" type="text/css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"  media="screen" rel="stylesheet" type="text/css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/slicknav.min.css" media="screen" rel="stylesheet"
+          type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.css" media="screen"
+          rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" media="screen"
+          rel="stylesheet" type="text/css">
     <link th:href="@{/css/shop_market.css}" media="screen" rel="stylesheet" type="text/css">
-    <link th:href="@{/css/style.css}"  media="screen" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/style.css}" media="screen" rel="stylesheet" type="text/css">
 
 
 </head>
 <body>
 
-
-<div th:replace="fragments/header :: header"> This header content is going to be replaced.</div>
-
-<div th:replace="fragments/menu :: menu"> This header content is going to be replaced.</div>
-
-<div th:replace="fragments/hamburger :: hamburger"> This header content is going to be replaced.</div>
+<div layout:fragment="header">
 
 
+    <div th:replace="fragments/header :: header"> This header content is going to be replaced.</div>
+
+    <div th:replace="fragments/menu :: menu"> This header content is going to be replaced.</div>
+
+    <div th:replace="fragments/hamburger :: hamburger"> This header content is going to be replaced.</div>
+
+</div>
 
 <div class="container">
     <div class="row">
-<!--        <div class="col-lg-3" layout:fragment="sidebar">-->
+        <!--        <div class="col-lg-3" layout:fragment="sidebar">-->
 
-<!--            <h1>This is the layout's sidebar</h1>-->
+        <!--            <h1>This is the layout's sidebar</h1>-->
 
-<!--            <p>This is the sidebar placeholder. This content will be replaced if the page-->
-<!--                using the layout also defines a layout:fragment="sidebar" segment.</p>-->
-<!--        </div>-->
-        <div class="col-lg-9" layout:fragment="content">
+        <!--            <p>This is the sidebar placeholder. This content will be replaced if the page-->
+        <!--                using the layout also defines a layout:fragment="sidebar" segment.</p>-->
+        <!--        </div>-->
+        <div  layout:fragment="content">
             <h1>This is the Layout's main section</h1>
             <p>This is the main content placeholder. This content will be replaced if the page
                 using the layout also defines a layout:fragment="content" segment. </p>
@@ -55,15 +63,27 @@
     This content will remain, but other content will be inserted after it.
 </footer>
 
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"  type="text/javascript"></script>
-<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"  type="text/javascript"></script>
-<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"  type="text/javascript"></script>
-<script th:src="@{/webjars/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js}"  type="text/javascript"></script>
-<script th:src="@{/webjars/owl.carousel/2.3.4/src/js/owl.carousel.js}"  type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.js"  type="text/javascript"></script>
+
+<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" type="text/javascript"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}" type="text/javascript"></script>
+<script th:src="@{/webjars/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+<script th:src="@{/webjars/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js}" type="text/javascript"></script>
+<script th:src="@{/webjars/owl.carousel/2.3.4/src/js/owl.carousel.js}" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.js" type="text/javascript"></script>
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"  type="text/javascript"></script>-->
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"  type="text/javascript"></script>-->
 <script th:src="@{/js/shop_market.js}" src="/static/js/shop_market.js" type="text/javascript"></script>
-<script th:src="@{/js/main.js}"  type="text/javascript"></script>
+<script th:src="@{/js/main.js}" type="text/javascript"></script>
+
+<script>
+    $('.input-group.date').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+</script>
+
 </body>
 </html>

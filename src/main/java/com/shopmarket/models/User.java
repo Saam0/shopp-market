@@ -1,17 +1,21 @@
 package com.shopmarket.models;
 
 
-import lombok.*;
 import com.shopmarket.validation.PasswordMatches;
 import com.shopmarket.validation.ValidEmail;
 import com.shopmarket.validation.ValidPassword;
-import org.springframework.validation.annotation.Validated;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
-
 
 
 @PasswordMatches
@@ -27,9 +31,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "{message.validation.noteBlank}")
     private String firstName;
 
-    private String LastName;
+    @NotBlank(message = "{message.validation.noteBlank}")
+    private String lastName;
 
     @ValidEmail
     private String email;
@@ -37,14 +43,16 @@ public class User {
 
     private String gender;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date birthDate;
 
 
     private boolean enabled;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dateCreated;
 
-    @NotBlank(message = "{message.phone.notEmpty}")
+    @NotBlank(message = "{message.validation.noteBlank}")
     private String phoneNumber;
 
     @ValidPassword
@@ -53,8 +61,9 @@ public class User {
     @Transient
     private String passwordConfirm;
 
+    @Valid
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Address> addresses;
+    private List<Address> addresses;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private Cart cart;

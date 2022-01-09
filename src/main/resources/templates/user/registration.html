@@ -3,186 +3,217 @@
       xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{layouts/layout}">
 <head>
+
     <meta charset="UTF-8">
     <title>Registration</title>
 </head>
 <body>
+
+<div layout:fragment="header">
+    <div th:replace="fragments/header :: header"> This header content is going to be replaced.</div>
+</div>
+
 <div class="container">
     <div class="row">
         <div layout:fragment="content">
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <form class="form" action="#" th:action="@{/user/registration}" method="post" th:object="${userForm}">
-                            <!--                    First Name-->
-                            <div class="form-group">
-                                <label class="control-label col-xs-3" for="firstName"
-                                       th:utext="#{label.user.firstName}">First name:</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="firstName" th:field="*{firstName}"
-                                           required="required">
-                                </div>
-                            </div>
+            <!--            <div class="container">-->
+            <!--                                <div class="row justify-content-md-center">-->
+            <!--                    <div class="col-12">-->
+            <form class="form" action="#" th:action="@{/user/registration}" method="post"
+                  th:object="${userForm}">
 
-                            <!--                    Last Name-->
-                            <div class="form-group">
-                                <label class="control-label col-xs-3" for="lastName" th:utext="#{label.user.lastName}">Last
-                                    Name:</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="lastName" th:field="*{lastName}"
-                                           required="required">
-                                </div>
-                            </div>
-
-                            <!--                    phones-->
-                            <div class="form-group">
-                                <label class="control-label col-xs-3" for="phones" th:utext="#{label.user.phoneNumber}">Phone
-                                    number:</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="phones" th:field="*{phoneNumber}"
-                                           required="required" placeholder="055-203-060">
-                                </div>
-                            </div>
-
-<!--                            &lt;!&ndash;                    country&ndash;&gt;-->
-<!--                            <div class="form-group">-->
-<!--                                <label class="control-label col-xs-3" for="country" th:utext="#{label.user.country}">Country:</label>-->
-<!--                                <div class="col-xs-9">-->
-<!--                                    <input type="text" class="form-control" id="country" name="country"-->
-<!--                                           placeholder="Armenia">-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            &lt;!&ndash;                    city&ndash;&gt;-->
-<!--                            <div class="form-group">-->
-<!--                                <label class="control-label col-xs-3" for="city"-->
-<!--                                       th:utext="#{label.user.city}">City:</label>-->
-<!--                                <div class="col-xs-9">-->
-<!--                                    <input type="text" class="form-control" id="city" name="city"-->
-<!--                                           placeholder="Yerevan">-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            &lt;!&ndash;                    address&ndash;&gt;-->
-<!--                            <div class="form-group">-->
-<!--                                <label class="control-label col-xs-3" for="address"-->
-<!--                                       th:utext="#{label.user.addressLine}">Address:</label>-->
-<!--                                <div class="col-xs-9">-->
-<!--                                    <input type="text" class="form-control" id="address" name="address"-->
-<!--                                           placeholder="18/1 Amiryan Street">-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-                            <!--     &lt;!&ndash;                    Date of Birth&ndash;&gt;
-                                 <div class="form-group form-inline ">
-                                     <label class="control-label col-xs-3">Date of Birth:</label>
-                                     <div class="col-xs-3">
-                                         <select class="form-control">
-                                             <option>Day</option>
-                                         </select>
-                                     </div>
-                                     <div class="col-xs-3">
-                                         <select class="form-control">
-                                             <option>Month</option>
-                                         </select>
-                                     </div>
-                                     <div class="col-xs-3">
-                                         <select class="form-control">
-                                             <option>Year</option>
-                                         </select>
-                                     </div>
-                                 </div>
-                    -->
-                            <!--                    Email-->
-                            <div class="form-group">
-                                <label class="control-label col-xs-3" for="inputEmail" th:utext="#{label.user.email}">Email:</label>
-                                <div class="col-xs-9">
-                                    <input type="email" class="form-control" id="inputEmail" th:field="*{email}"
-                                           required="required"
-                                           placeholder="gagik@mail.ru">
-                                </div>
-                            </div>
-
-
-                            <!--                    Password-->
-                            <div class="form-group">
-                                <label class="control-label col-xs-3" for="inputPassword"
-                                       th:utext="#{label.user.password}">Password:</label>
-                                <div class="col-xs-9">
-                                    <input type="password" class="form-control" id="inputPassword"
-                                           th:field="*{password}" required="required">
-                                </div>
-                            </div>
-
-                            <!--                    Confirm password:-->
-                            <div class="form-group">
-                                <label class="control-label col-xs-3" for="confirmPass"
-                                       th:utext="#{label.user.confirmPassword}">Confirm password:</label>
-                                <div class="col-xs-9">
-                                    <input type="password" class="form-control" id="confirmPass" th:field="*{passwordConfirm}"
-                                           required="required">
-                                </div>
-                            </div>
-
-
-                            <!--<div class="form-group">
-                                <label class="control-label col-xs-3" for="phoneNumber">Телефон:</label>
-                                <div class="col-xs-9">
-                                    <input type="tel" class="form-control" id="phoneNumber"
-                                           placeholder="Введите номер телефона">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-xs-3" for="postalAddress">Адрес:</label>
-                                <div class="col-xs-9">
-                                    <textarea rows="3" class="form-control" id="postalAddress"
-                                              placeholder="Введите адрес"></textarea>
-                                </div>
-                            </div>-->
-
-                            <!--                    Gender:-->
-                            <!--   <div class="form-group">
-                                   <label class="control-label col-xs-3">Gender:</label>
-                                   <div class="col-xs-2">
-                                       <label class="radio-inline">
-                                           <input type="radio" name="genderRadios" value="male"> Male
-                                       </label>
-                                   </div>
-                                   <div class="col-xs-2">
-                                       <label class="radio-inline">
-                                           <input type="radio" name="genderRadios" value="female"> Female
-                                       </label>
-                                   </div>
-                               </div>
-                    -->
-                            <div class="form-group">
-                                <div class="col-xs-offset-3 col-xs-9">
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" value="agree"> I agree with the <a
-                                            href="#">conditions</a>.
-                                    </label>
-                                </div>
-                            </div>
-                            <br/>
-
-                            <div class="form-group">
-                                <div class="col-xs-offset-3 col-xs-9">
-                                    <input type="submit" class="btn btn-primary" value="Submit">
-                                    <input type="reset" class="btn btn-outline-secondary" value="Reset form">
-                                    <a class="btn btn-outline-secondary" th:href="@{/}">Veradardz</a>
-                                </div>
-                            </div>
-                        </form>
-
+                <!--                    First Name-->
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="firstName"
+                           th:utext="#{label.user.firstName}">First name:</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="firstName"
+                               th:field="${userForm.firstName}" th:errorclass="is-invalid">
+                        <span class="invalid-feedback" th:each="error: ${#fields.errors('firstName')}"
+                              th:utext="${error}">Validation error</span>
                     </div>
                 </div>
-            </div>
 
+                <!--                    Last Name-->
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="lastName" th:utext="#{label.user.lastName}">Last
+                        Name:</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="lastName" th:errorclass="is-invalid"
+                               th:field="*{lastName}">
+                        <span class="invalid-feedback" th:each="error: ${#fields.errors('lastName')}"
+                              th:text="${error}">Validation error</span>
+                    </div>
+                </div>
+
+                <!--                    phones-->
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="phones" th:utext="#{label.user.phoneNumber}">Phone
+                        number:</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="phones" th:errorclass="is-invalid"
+                               th:field="*{phoneNumber} "
+                               placeholder="055-203-060">
+                        <span class="invalid-feedback" th:each="error: ${#fields.errors('phoneNumber')}"
+                              th:text="${error}">Validation error</span>
+                    </div>
+
+                </div>
+
+
+                <!--                    Address-->
+                <th:block th:each="address, stat:${userForm.addresses}">
+
+                    <!--                                addressLine-->
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" for="address"
+                               th:utext="#{label.user.addressLine}">Address line:</label>
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="address" name="country"
+                                   th:field="*{addresses[__${stat.index}__].addressLine}"
+                                   placeholder="18/1 Araratyan Street">
+                        </div>
+                    </div>
+
+                    <!--                                City-->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="control-label col-xs-3 " for="city"
+                                   th:utext="#{label.user.city}">City:</label>
+                            <div class="col-xs-3">
+                                <input type="text" class="form-control " id="city" name="country"
+                                       th:field="*{addresses[__${stat.index}__].city}"
+                                       placeholder="Artashat">
+                            </div>
+                        </div>
+                        <!--                                province-->
+<!--                        <div class="form-group">-->
+<!--                            <label class="control-label col-xs-3" for="province"-->
+<!--                                   th:utext="#{label.user.province}">Province:</label>-->
+<!--                            <div class="col-xs-3">-->
+<!--                                <input type="text" class="form-control" id="province" name="country"-->
+<!--                                       th:field="*{addresses[__${stat.index}__].province}"-->
+<!--                                       placeholder="Ararat">-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+                        <!--                                Country-->
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="country"
+                                   th:utext="#{label.user.country}">Country:</label>
+                            <div class="col-xs-3">
+                                <input type="text" class="form-control " id="country" name="country"
+                                       th:field="*{addresses[__${stat.index}__].country}" th:errorclass="is-invalid"
+                                       placeholder="Armenia">
+                                <span class="invalid-feedback" th:each="error: ${#fields.errors('addresses[__${stat.index}__].country')}"
+                                      th:utext="${error}">Validation error</span>
+                            </div>
+                        </div>
+
+                        <!--                                postal code-->
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="postalCode"
+                                   th:utext="#{label.user.postalCode}">Postal code:</label>
+                            <div class="col-xs-3">
+                                <input type="text" class="form-control " id="postalCode" name="country"
+                                       th:field="*{addresses[__${stat.index}__].postalCode}"
+                                       placeholder="1101">
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+
+                <!--                                Gender-->
+                <div class="form-check-inline">
+                    <label class="form-check-label col-xs-3">
+                        <input type="radio" class="form-check-input " id="male"
+                               th:field="*{gender}" value="Male" > <span th:utext="#{label.user.genderMale}">Male</span>
+                    </label>
+                </div>
+                <div class="form-check-inline">
+                    <label class="form-check-label col-xs-3">
+                        <input type="radio" class="form-check-input " id="female"
+                               th:field="*{gender}" value="Female" > <span th:utext="#{label.user.genderFemale}">Female</span>
+                    </label>
+                </div>
+
+
+                <!--                    birthDate-->
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="birthDate" th:utext="#{label.user.birthDate}">Birth date:</label>
+                    <div class="input-group date">
+                        <input type="text" class="form-control" id="birthDate" th:errorclass="is-invalid"
+                               th:field="*{birthDate}" autocomplete="off" >
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--                    Email-->
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="inputEmail"
+                           th:utext="#{label.user.email}">Email:</label>
+                    <div class="col-xs-9">
+                        <input type="email" class="form-control" id="inputEmail" th:field="*{email}"
+                               placeholder="gagik@mail.ru" th:errorclass="is-invalid">
+                        <span class="invalid-feedback" th:each="error: ${#fields.errors('email')}"
+                              th:utext="${error}">Validation error</span>
+                    </div>
+                </div>
+
+
+                <!--                    Password-->
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="inputPassword"
+                           th:utext="#{label.user.password}">Password:</label>
+                    <div class="col-xs-9">
+                        <input type="password" class="form-control" id="inputPassword"
+                               th:field="*{password}" th:errorclass="is-invalid">
+                        <span class="invalid-feedback" th:each="error: ${#fields.errors('password')}"
+                              th:utext="${error}">Validation error</span>
+                    </div>
+                </div>
+
+                <!--                    Confirm password:-->
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="confirmPass"
+                           th:utext="#{label.user.confirmPassword}">Confirm password:</label>
+                    <div class="col-xs-9">
+                        <input type="password" class="form-control" id="confirmPass"
+                               th:field="*{passwordConfirm}" th:errorclass="is-invalid">
+                        <span class="invalid-feedback" th:each="error: ${#fields.errors('passwordConfirm')}"
+                              th:utext="${error}">Validation error</span>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-xs-offset-3 col-xs-9">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" value="agree"> I agree with the <a
+                                href="#">conditions</a>.
+                        </label>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="form-group">
+                    <div class="col-xs-offset-3 col-xs-9">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <input type="reset" class="btn btn-outline-secondary" value="Reset form">
+                        <a class="btn btn-outline-secondary" th:href="@{/}">Veradardz</a>
+                    </div>
+                </div>
+            </form>
 
         </div>
-
     </div>
 </div>
+
+
+
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -45,7 +46,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/reg","/block").anonymous()
 //                .antMatchers("/admin/**").hasRole("ADMIN")
 //                .antMatchers("/user/new").anonymous()
-                .antMatchers("/**").anonymous()
+//                .antMatchers("/**").anonymous()
+                .antMatchers("/**").permitAll()
 //                .antMatchers("/user/new1").anonymous()
 //                .antMatchers("/customer/new").anonymous()
 //                .antMatchers("/customer/_new1").anonymous()
@@ -64,9 +66,13 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
 
                 .formLogin()
-                .loginPage("/").permitAll()
+                .loginPage("/login").permitAll()
                 .and()
-                .logout().permitAll().logoutSuccessUrl("/");
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutUrl("/logout")
+                .logoutSuccessUrl("/");
+//                .permitAll().logoutSuccessUrl("/");
     }
 
 

@@ -3,6 +3,7 @@ package com.shopmarket.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -20,6 +21,8 @@ public class Cart {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @MapsId
     private User user;
+
+    private String name;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true,
             targetEntity = CartItem.class, mappedBy = "cart")

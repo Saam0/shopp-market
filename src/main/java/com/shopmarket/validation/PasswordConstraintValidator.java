@@ -11,10 +11,10 @@ import com.google.common.base.Joiner;
 
 
 public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
-    @Override
-    public void initialize(ValidPassword constraintAnnotation) {
-
-    }
+//    @Override
+//    public void initialize(ValidPassword constraintAnnotation) {
+//
+//    }
 
     @Override
     public boolean isValid(String password, ConstraintValidatorContext context) {

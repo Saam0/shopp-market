@@ -1,0 +1,49 @@
+<!-- Modal -->
+<div th:fragment="login(id)" class="modal fade" th:id="${id}" tabindex="-1" aria-labelledby="loginModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel" th:utext="#{modal.user.loginTitle}">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="#" th:action="@{/login}" method="post">
+
+                    <!--                    Email-->
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" for="inputEmail">Email:</label>
+                        <div class="col-xs-9">
+                            <input type="email" name="username" class="form-control" id="inputEmail"
+                                   placeholder="Enter your Email">
+                        </div>
+                    </div>
+
+                    <!--                    Password-->
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" for="inputPassword">Password:</label>
+                        <div class="col-xs-9">
+                            <input type="password" name="password" class="form-control" id="inputPassword"
+                                   placeholder="Enter your password">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-xs-offset-3 col-xs-9">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                            <input type="reset" class="btn btn-default" value="Reset form">
+                        </div>
+                    </div>
+                    <div>
+                        <a href="/user/registration">Registration </a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

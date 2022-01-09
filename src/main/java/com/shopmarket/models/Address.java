@@ -3,6 +3,7 @@ package com.shopmarket.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 /**
  * Address of the {@link User}
@@ -16,6 +17,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    @NotBlank(message = "{message.validation.noteBlank}")
     private String country;         // Country ex:Armenia
 
     private String province;        // District/County/Province/State ex:Armavir
