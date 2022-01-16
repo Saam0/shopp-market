@@ -1,12 +1,15 @@
 package com.shopmarket.models.catalog;
 
 import com.shopmarket.models.Product;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "t_type")
 public class Type {
@@ -14,7 +17,7 @@ public class Type {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String type;
+    private String typeName;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private SubType subType;

@@ -4,6 +4,7 @@ import com.shopmarket.models.catalog.Type;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.util.UUID;
 
 @Data
@@ -24,6 +25,10 @@ public class Product {
     @OneToOne(cascade = CascadeType.ALL)
     private ProductDetails productDetails;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Picture picture;
+
+    @Valid
     @OneToOne(mappedBy = "product")
     private Stock stock;
 

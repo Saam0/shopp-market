@@ -1,11 +1,14 @@
 package com.shopmarket.models.catalog;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "t_sub_type")
 public class SubType {
@@ -13,7 +16,7 @@ public class SubType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String subType;
+    private String subTypeName;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private GlobalType globalType;

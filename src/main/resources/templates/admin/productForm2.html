@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout}">
+<head>
+
+    <link th:href="@{/css/select2-develop/dist/css/select2.css}" media="screen" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/select2-bootstrap4-theme-master/dist/select2-bootstrap4.css}" media="screen" rel="stylesheet"
+          type="text/css">
+    <link th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css} " media="screen"
+          rel="stylesheet" type="text/css">
+    <link th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker.css} " media="screen" rel="stylesheet"
+          type="text/css">
+
+    <meta charset="UTF-8">
+    <title>Add product</title>
+
+</head>
+<body>
+<div layout:fragment="header">
+    <div th:replace="fragments/header :: header"> This header content is going to be replaced.</div>
+</div>
+
+
+<div layout:fragment="content">
+
+    <form class="form" action="#" th:action="@{/product/add}" method="post" th:object="${productModel}">
+
+        <!--                    Product Name-->
+        <div class="form-group">
+            <label class="control-label" for="productName"
+                   th:utext="#{label.product.name}">Product name:</label>
+            <input type="text" class="form-control" id="productName"
+                   th:field="*{productName}" th:errorclass="is-invalid">
+            <span class="invalid-feedback" th:each="error: ${#fields.errors('productName')}"
+                  th:utext="${error}">Validation error</span>
+        </div>
+
+        <!--                    Department-->
+        <!--        ===============================================-->
+        <!--        ===============================================-->
+        <!--        ===============================================-->
+        <!--        ===============================================-->
+        <div class="form-row ">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="globalType"
+                           th:utext="#{label.product.globalType}">Department:</label>
+                    <select id="globalType" class="form-control select2-single"
+                            th:field="*{type}">
+                        <option value="">Search department...</option>
+                        <option th:each="globType : ${catalogList}" th:utext="${globType.globalTypeName}"
+                                th:value="${globType.id}">Search department...
+                        </option>
+                        <!--                        <option th:each="type : ${typeList}" th:utext="${type.typeName}" th:value="${type.id}">Catalog-->
+                        <!--                        </option>-->
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="category"
+                           th:utext="#{label.product.subType}">Category:</label>
+                    <select id="category" class="form-control select2-single">
+                        <option value="">Search category...</option>
+<!--                        <option th:each="subtype : ${catalogList}" th:utext="${subtype.getSubTypes()}"-->
+<!--                                th:value="${subtype.getSubTypes()}">Search department...-->
+<!--                        </option>-->
+
+                        <!--                        <option th:each="type : ${typeList}" th:utext="${type.typeName}" th:value="${type.id}">Catalog-->
+                        <!--                        </option>-->
+                    </select>
+                </div>
+            </div>
+
+            <!--                    Category-->
+<!--            <div class="col-sm-4">-->
+<!--                <div class="form-group">-->
+<!--                    <label class="control-label" for="category"-->
+<!--                           th:utext="#{label.product.subType}">Category:</label>-->
+<!--                    <select id="category" class="form-control select2-single"-->
+<!--                            th:field="*{type}">-->
+<!--                        <option value="">Search category...</option>-->
+<!--                        <option th:each="subtype : ${catalogList}" th:utext="${subtype.getSubTypes()}"-->
+<!--                                th:value="${subtype.getSubTypes()}">Search department...-->
+<!--                        </option>-->
+
+<!--                        &lt;!&ndash;                        <option th:each="type : ${typeList}" th:utext="${type.typeName}" th:value="${type.id}">Catalog&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        </option>&ndash;&gt;-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+            <!--                    Type-->
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label " for="type" th:utext="#{label.product.type}">Type:</label>
+                    <select id="type" class="form-control select2-single"
+                            th:field="*{type}">
+                        <option value="">Search type...</option>
+                        <option th:each="type : ${typeList}" th:utext="${type.typeName}" th:value="${type.id}">Catalog
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--        ==========================================================-->
+        <!--        ==========================================================-->
+        <!--        ==========================================================-->
+        <!--        ==========================================================-->
+
+
+        <!--                    Supplier-->
+        <div class="form-group">
+
+            <label class="control-label" for="supplier"
+                   th:utext="#{label.product.supplierName}">Supplier name:</label>
+            <div class="input-group">
+                <select id="supplier" class="form-control select2-single"
+                        name="supplier">
+                    <option value="">Search category...</option>
+                    <!--                        <option th:each="type : ${typeList}" th:utext="${type.typeName}" th:value="${type.id}">Catalog-->
+                    <!--                        </option>-->
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="button"
+                            th:utext="#{label.product.supplierName.add}">Add
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <!--                    Product quantity-->
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label" for="productQuantity"
+                           th:utext="#{label.product.quantity}">Product quantity:</label>
+                    <input type="number" class="form-control" id="productQuantity"
+                           th:field="${productModel.stock.quantity}" th:errorclass="is-invalid">
+                    <!--                    <span class="invalid-feedback" th:each="error: ${#fields.errors(${productModel.stock.quantity})}"-->
+                    <!--                          th:utext="${error}">Validation error</span>-->
+                </div>
+            </div>
+            <!--                    Product price-->
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label" for="productPrice"
+                           th:utext="#{label.product.price}">Product price:</label>
+                    <input type="number" class="form-control" id="productPrice"
+                           th:field="${productModel.stock.purchasePrice}" th:errorclass="is-invalid">
+                    <!--                    <span class="invalid-feedback" th:each="error: ${#fields.errors(${productModel.stock.purchasePrice})}"-->
+                    <!--                          th:utext="${error}">Validation error</span>-->
+                </div>
+            </div>
+            <!--                    Product unit-->
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="control-label" for="productUnit"
+                           th:utext="#{label.product.unit}">Product unit:</label>
+                    <input type="text" class="form-control" id="productUnit"
+                           th:field="${productModel.stock.unitOfMeasurement}" th:errorclass="is-invalid">
+                    <!--                    <span class="invalid-feedback" th:each="error: ${#fields.errors(${productModel.stock.purchasePrice})}"-->
+                    <!--                          th:utext="${error}">Validation error</span>-->
+                </div>
+            </div>
+
+            <!--                    Purchase date-->
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label" for="purchaseDate" th:utext="#{label.product.purchaseDate}">Purchase
+                        date:</label>
+                    <div class="input-group date">
+                        <input type="text" class="form-control" id="purchaseDate" th:errorclass="is-invalid"
+                               th:field="${productModel.stock.purchaseDate}" autocomplete="off">
+                        <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-calendar"
+                                                                      aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block layout:fragment="scripts">
+    <script th:src="@{/css/select2-develop/dist/js/select2.full.js}"></script>
+    <script th:src="@{/webjars/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+<!--    <script>-->
+<!--        $.ajax({-->
+<!--            -->
+<!--            -->
+<!--            type: 'POST',  //send POST method -->
+<!--            url: 'https://создание-сайта.net/',-->
+<!--            data: {-->
+<!--                'name': 'igor',-->
+<!--                'work': 'it'-->
+<!--            },-->
+<!--            dataType: "html", //тип результата в данном случае html-->
+<!--            success: function(msg){-->
+<!--                alert(msg); //msg - post return-->
+<!--            }-->
+<!--        });-->
+<!--    </script>-->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function changeBrand() {
+            var selectedBrand = $("#globalType option:selected").text();
+
+            $.ajax({
+                url: "@{product/add}",
+                data: {globalType: selectedBrand},
+                type: "POST",
+
+
+
+                success: function (data) {
+
+                    // Resetting select option
+                    var select = document.getElementById("category");
+                    select.options.length = 0;
+
+                    options = data.options;
+                    for (var i = 0; i < data.length; i++) {
+                        select.options[select.options.length] = new Option(data[i], i);
+                    }
+                    for (var i = 0; i < select.childElementCount; i++) {
+                        console.log(select.options[i]);
+                    }
+
+                }, error: function (error) {
+                    console.log(error);
+                }
+
+            });
+
+        }
+
+        /*]]>*/
+    </script>
+
+
+    <script>
+        $("#globalType").select2({
+            theme: "bootstrap4",
+
+        });
+    </script>
+    <!--script for purchase date-->
+    <script>
+        $('.input-group.date').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+    </script>
+</th:block>
+
+
+</body>
+</html>

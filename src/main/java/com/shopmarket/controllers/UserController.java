@@ -22,7 +22,6 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Validated
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -57,12 +56,9 @@ public class UserController {
                                       BindingResult bindingResult,
                                       Model model, final HttpServletRequest request) {
 
-        System.out.println(userForm.getAddresses().toString());
-
         if (bindingResult.hasErrors()) {
             return "user/registration";
         }
-
         try {
             final User registeredUser = userService.save(userForm);
             final Address address = userForm.getAddresses().get(0);
@@ -87,23 +83,6 @@ public class UserController {
         return "successRegister";
     }
 
-//    @PostMapping("/registration")
-//    public String registerUserAccount(@ModelAttribute("userForm") @Valid final User userForm, BindingResult bindingResult,
-//                                      Model model, final HttpServletRequest request) {
-//
-//        System.out.println(userForm.getEmail() + "; " + userForm.getPassword());
-//
-//        if (bindingResult.hasErrors()) {
-//            return "emailError";
-//        }
-//
-//        final User registeredUser = userService.save(userForm);
-//
-//        System.out.println(registeredUser.getEmail() + "; " + registeredUser.getPassword());
-//
-//
-//        return "successRegister";
-//    }
 
 
 }

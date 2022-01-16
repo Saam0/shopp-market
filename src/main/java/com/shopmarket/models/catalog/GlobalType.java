@@ -1,11 +1,14 @@
 package com.shopmarket.models.catalog;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "t_global_type")
 public class GlobalType {
@@ -13,7 +16,7 @@ public class GlobalType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String globalType;
+    private String globalTypeName;
 
     @OneToMany(mappedBy = "globalType", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubType> subTypes;

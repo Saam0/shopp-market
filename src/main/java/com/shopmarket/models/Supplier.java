@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "t_supplier")
 public class Supplier {
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long Id;
 
