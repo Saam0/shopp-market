@@ -37,6 +37,11 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
+    public Optional<Type> findByTypeId(Long id) {
+        return typeRepository.findById(id);
+    }
+
+    @Override
     public GlobalType save(GlobalType globalType) {
         return globalTypeRepository.save(globalType);
     }

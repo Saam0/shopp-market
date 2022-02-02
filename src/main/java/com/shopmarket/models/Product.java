@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Data
@@ -32,6 +33,7 @@ public class Product {
     @OneToOne(mappedBy = "product")
     private Stock stock;
 
+//    @Valid
     @ManyToOne(fetch = FetchType.LAZY)
     private Type type;
 

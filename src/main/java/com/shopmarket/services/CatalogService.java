@@ -13,5 +13,6 @@ public interface CatalogService {
     List<GlobalType> findAll();
     public List<Type> findAllType();
     Optional<GlobalType> findById(Long id);
+    Optional<Type> findByTypeId(Long id);
     GlobalType save(GlobalType globalType);
 }
