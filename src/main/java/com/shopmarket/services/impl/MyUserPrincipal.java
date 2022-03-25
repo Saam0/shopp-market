@@ -2,7 +2,7 @@ package com.shopmarket.services.impl;
 
 import com.shopmarket.models.Role;
 import com.shopmarket.models.User;
-import netscape.security.Privilege;
+//import netscape.security.Privilege;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

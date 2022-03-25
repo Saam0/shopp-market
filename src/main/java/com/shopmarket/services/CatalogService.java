@@ -15,4 +15,6 @@ public interface CatalogService {
     Optional<GlobalType> findById(Long id);
     Optional<Type> findByTypeId(Long id);
     GlobalType save(GlobalType globalType);
+
+
 }

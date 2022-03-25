@@ -3,7 +3,6 @@ package com.shopmarket.models;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -29,6 +28,32 @@ public class Cart {
     private List<CartItem> cartItems;
 
     private boolean deliveryIncluded = true;
+
+
+
+    public void addCartItem(CartItem cartItem) {
+        addCartItem(cartItem, false);
+    }
+
+    public void addCartItem(CartItem cartItem, boolean otherSideHasBeenSet) {
+        getCartItems().add(cartItem);
+        if (otherSideHasBeenSet) {
+            return;
+        }
+        cartItem.setCart(this, true);
+    }
+
+    public void removeCartItem(CartItem cartItem) {
+        removeCartItem(cartItem, false);
+    }
+
+    public void removeCartItem(CartItem cartItem, boolean otherSideHasBeenSet) {
+        getCartItems().remove(cartItem);
+        if (otherSideHasBeenSet) {
+            return;
+        }
+        cartItem.removeCart(this, true);
+    }
 
 
 }

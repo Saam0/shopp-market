@@ -4,10 +4,7 @@ package com.shopmarket.models;
 import com.shopmarket.validation.PasswordMatches;
 import com.shopmarket.validation.ValidEmail;
 import com.shopmarket.validation.ValidPassword;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -29,6 +26,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
 
     @NotBlank(message = "{message.validation.noteBlank}")
