@@ -12,9 +12,9 @@
 
         <div  layout:fragment="content">
 
-<!--            <p th:utext="${session.user.name}">-->
-<!--                Welcome to our grocery store, Sebastian Pepper!-->
-<!--            </p>-->
+            <div th:replace="fragments/carousel::carousel"> aaa</div>
+
+
 
             <div sec:authorize="hasRole('ROLE_USER')">
                 Content for users

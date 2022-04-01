@@ -23,9 +23,11 @@
     <div class="row">
         <div layout:fragment="content">
 
-            <!--            <div class="container">-->
-            <!--                                <div class="row justify-content-md-center">-->
-            <!--                    <div class="col-12">-->
+            <div>
+                <h5 th:if="${message}!=null" ? class="alert alert-danger" th:utext="${message}"> success </h5>
+            </div>
+
+
             <form class="form" action="#" th:action="@{/user/registration}" method="post"
                   th:object="${userForm}">
 

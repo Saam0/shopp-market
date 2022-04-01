@@ -33,8 +33,14 @@ public class Product {
     @OneToOne(mappedBy = "product")
     private Stock stock;
 
-//    @Valid
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Valid
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "type_id")
     private Type type;
+
+
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private Type type;
 
 }

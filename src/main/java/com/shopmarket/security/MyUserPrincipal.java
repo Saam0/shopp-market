@@ -1,20 +1,17 @@
-package com.shopmarket.services.impl;
+package com.shopmarket.security;
 
 import com.shopmarket.models.Role;
 import com.shopmarket.models.User;
-//import netscape.security.Privilege;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-//@Service
 public class MyUserPrincipal implements UserDetails {
-    private static final long serialVersionUID = 1L;
+//    private static final long serialVersionUID = 1L;
     private final User user;
 
     public MyUserPrincipal(User user) {

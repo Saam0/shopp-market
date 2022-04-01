@@ -14,7 +14,7 @@ public interface CatalogService {
     public List<Type> findAllType();
     Optional<GlobalType> findById(Long id);
     Optional<Type> findByTypeId(Long id);
+    Optional<Type> findByTypeName(String typeName);
     GlobalType save(GlobalType globalType);
-
 
 }

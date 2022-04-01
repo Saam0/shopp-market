@@ -1,0 +1,26 @@
+ <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <a class="navbar-brand " href="#">OMzzzzzzzzzz</a>
+
+
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+                        <li class=" dropdown ">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menu
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li th:each="global:${catalog}">
+                                    <a class="dropdown-item" href="#" th:utext="${global.globalTypeName}">Global type</a>
+                                    <ul class="dropdown-menu dropdown-submenu">
+                                        <li th:each="subType:${global.subTypes}">
+                                            <a class="dropdown-item" href="#"
+                                               th:utext="${subType.subTypeName}">Sub
+                                                type</a>
+
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>

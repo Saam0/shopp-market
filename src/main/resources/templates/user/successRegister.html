@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>ааа</title>
+</head>
+<body>
+
+<div layout:fragment="header">
+    <div th:replace="fragments/header :: header"> This header content is going to be replaced.</div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div layout:fragment="content">
+            <div sec:authorize="!isAuthenticated()">
+                <h4 class="alert alert-success" th:utext="#{message.regSuccess}">success</h4>
+                <h5><a class="alert alert-success" th:href="@{/}" th:utext="#{reference.goTo.homePage}">Home Page</a></h5>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
