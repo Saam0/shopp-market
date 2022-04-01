@@ -63,14 +63,14 @@ public class UserController {
             final User registeredUser = userService.save(userForm);
             final Address address = userForm.getAddresses().get(0);
             address.setUser(registeredUser);
-            System.out.println("user id = " + address.getUser().getId());
             addressService.save(address);
-            System.out.println(registeredUser.getEmail() + "; " + registeredUser.getPassword());
 
 //        final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+//            System.out.println(appUrl);
 //        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
 
         } catch (final UserAlreadyExistException uaeEx) {
+            System.err.println(uaeEx.getMessage());
             model.addAttribute("user", userForm);
             String errMessage = messages.getMessage("message.regError", null, request.getLocale());
             model.addAttribute("message", errMessage);
@@ -80,7 +80,7 @@ public class UserController {
             return "emailError";
         }
 
-        return "successRegister";
+        return "/user/successRegister";
     }
 
 

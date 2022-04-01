@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="~{layouts/layout}">
+      layout:decorate="~{_layouts/layout}">
 <head>
 
     <meta charset="UTF-8">
@@ -16,16 +16,18 @@
 <body>
 
 <div layout:fragment="header">
-    <div th:replace="fragments/header :: header"> This header content is going to be replaced.</div>
+    <div th:replace="_layouts/fragments/header :: header"> This header content is going to be replaced.</div>
 </div>
 
 <div class="container">
     <div class="row">
         <div layout:fragment="content">
 
-            <!--            <div class="container">-->
-            <!--                                <div class="row justify-content-md-center">-->
-            <!--                    <div class="col-12">-->
+            <div>
+                <h5 th:if="${message}!=null" ? class="alert alert-danger" th:utext="${message}"> success </h5>
+            </div>
+
+
             <form class="form" action="#" th:action="@{/user/registration}" method="post"
                   th:object="${userForm}">
 

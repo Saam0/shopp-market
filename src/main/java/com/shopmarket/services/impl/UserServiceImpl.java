@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         newUser.setEnabled(user.isEnabled());
         newUser.setPhoneNumber(user.getPhoneNumber());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        newUser.setRoles(roleRepository.findByName(Roles.ROLE_USER.toString()));
+        newUser.setRoles(roleRepository.findByName(Roles.USER.toString()));
 
         System.out.println("service = " + newUser.getPassword() + "; " + newUser.getRoles().toString());
         System.out.println("service = " + newUser.getPasswordConfirm() + "; " + newUser.getRoles().toString());

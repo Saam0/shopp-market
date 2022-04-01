@@ -42,6 +42,11 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
+    public Optional<Type> findByTypeName(String typeName) {
+        return typeRepository.findByTypeName(typeName);
+    }
+
+    @Override
     public GlobalType save(GlobalType globalType) {
         return globalTypeRepository.save(globalType);
     }

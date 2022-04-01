@@ -1,89 +1,57 @@
 package com.shopmarket.controllers;
 
-import com.shopmarket.models.*;
-import com.shopmarket.models.catalog.GlobalType;
+import com.shopmarket.models.Product;
+import com.shopmarket.models.catalog.Type;
 import com.shopmarket.services.CatalogService;
 import com.shopmarket.services.ProductService;
-import com.shopmarket.services.StockService;
-import com.shopmarket.services.SupplierService;
-import org.slf4j.*;
+import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/")
 public class ProductController {
     @Autowired
     private ProductService productService;
     @Autowired
     private CatalogService catalogService;
+
+    @Qualifier("messageSource")
     @Autowired
-    private SupplierService supplierService;
-    @Autowired
-    private StockService stockService;
-
-    @Autowired
-    private Logger logger;
-
-    @GetMapping("/add")
-    public String addProduct(Model model){
-
-        model.addAttribute("productModel", new  Product());
-
-        List<GlobalType> catalogList = catalogService.findAll();
-        model.addAttribute("catalogList",catalogList);
-        model.addAttribute("typeList",catalogService.findAllType());
-        model.addAttribute("supplierList",supplierService.findAll());
-        return "admin/productForm";
-    }
+    private MessageSource messages;
 
 
+    @GetMapping("show/type")
+    public String ShowProductsByType(@RequestParam("name") String name, Model model, final HttpServletRequest request) {
 
-    @PostMapping("/add")
-    public String addProductPost(@ModelAttribute("productModel") @Valid Product productModel,
-                                 BindingResult bindingResult,
-                                 Model model){
-        if (bindingResult.hasErrors()) {
-            List<GlobalType> catalogList = catalogService.findAll();
-            model.addAttribute("catalogList",catalogList);
-            model.addAttribute("typeList",catalogService.findAllType());
-            model.addAttribute("supplierList",supplierService.findAll());
-            return "admin/productForm";
+
+        try {
+            List<Product> productList = catalogService.findByTypeName(name)
+                    .orElseThrow(() -> new NullPointerException("No products found with type: " + name)).getProducts();
+            model.addAttribute("productList", productList);
+            productList.stream().map(Product::getProductName).forEach(System.out::println);
+        } catch (NullPointerException e) {
+            e.getMessage();
+            String errMessage = messages.getMessage("message.product.type.error", null, request.getLocale());
+            model.addAttribute("errMessage", errMessage);
+            return "show_products";
         }
 
-//        Product product = new Product();
-//        product.setStock(stockService.save(productModel.getStock()));
-//        product.getStock().setSupplier(productModel.getStock().getSupplier());
-//        productService.save(productModel);
-//
-
-//        stockService.save(productModel.getStock());
-//
-//       if (supplierService.findById(productModel.getStock().getSupplier().getId()).isPresent()){
-//
-//       }
-//
 
 
 
-
-
-
-        logger.info("price : " + productModel.getStock().getPurchasePrice());
-        logger.info("price : " + productModel.getStock().getSupplier().getSupplierName());
-        logger.info("price : " + productModel.getType().getTypeName());
-        productService.save(productModel);
-
-        return "redirect:/product/add";
+        return "show_products";
     }
 }

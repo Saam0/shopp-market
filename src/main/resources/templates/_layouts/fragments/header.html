@@ -36,7 +36,7 @@
                             <div class="header__top__right__auth">
                                 <th:block sec:authorize="!isAuthenticated()">
                                 <a   href="" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user" ></i> <span th:utext="#{modal.user.login}"></span></a>
-                                <div   th:replace="fragments/login :: login('loginModal')"></div>
+                                <div   th:replace="_layouts/fragments/login :: login('loginModal')"></div>
                                 </th:block>
                                 <th:block sec:authorize="isAuthenticated()">
                                     <a   th:href="@{/logout}"  ><i class="fa fa-sign-out" ></i> <span th:utext="#{modal.user.logOut}"></span></a>

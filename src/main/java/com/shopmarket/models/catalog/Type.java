@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,12 +21,15 @@ public class Type {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotBlank(message = "{message.validation.noteBlank}")
+    @NotBlank(message = "{message.validation.noteBlank}")
     private String typeName;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private SubType subType;
 
     @OneToMany(mappedBy = "type", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "type", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Product> products;
 }

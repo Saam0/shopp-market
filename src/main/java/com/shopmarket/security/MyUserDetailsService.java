@@ -1,4 +1,4 @@
-package com.shopmarket.services.impl;
+package com.shopmarket.security;
 
 import com.shopmarket.models.User;
 import com.shopmarket.repositories.UserRepository;
@@ -16,19 +16,24 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+
     @Override
-    public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+    public UserDetails loadUserByUsername(final String email)  {
+//            User user = userRepository.findByEmail(email)
+//                    .orElseThrow(()->new UsernameNotFoundException("No user found with username: " + email));
+//            return new MyUserPrincipal(user);
+
         try {
             if (!userRepository.findByEmail(email).isPresent()){
                 throw new UsernameNotFoundException("No user found with username: " + email);
             }
             final User user = userRepository.findByEmail(email).get();
-            System.out.println(user.getEmail() + " " + user.getRoles().toString());
             return new MyUserPrincipal(user);
 
         } catch (final Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
+
+
 }

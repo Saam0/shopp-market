@@ -11,5 +11,6 @@ public interface SupplierService {
     Supplier save (Supplier supplier);
     Optional<Supplier> findByName(String name);
     Optional<Supplier> findById(Long id);
+    Optional<Supplier> findBySupplierName(String supplierName);
     List<Supplier> findAll();
 }

@@ -1,28 +1,41 @@
-<th:block th:fragment="menu" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<th:block th:fragment="menu"
+          xmlns:th="http://www.w3.org/1999/xhtml">
 
     <!-- Hero Section Begin -->
     <section class="hero">
         <div class="container">
             <div class="row">
+
+
                 <div class="col-lg-3">
                     <div class="hero__categories">
+
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
                             <span>All departments</span>
                         </div>
-                        <ul style=" display: none;">
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                        <ul style=" display: none">
+                            <li   th:each="global:${catalog}">
+                                <a href="#" th:utext="${global.globalTypeName}">Global type</a>
+
+                                <ul  style=" display: none;">
+                                    <li th:each="subType:${global.subTypes}" >
+                                        <a href="#" th:utext="${subType.subTypeName}">Sub type</a>
+
+                                        <ul style=" display: none;">
+                                            <li th:each="type:${subType.types}">
+                                                <a  th:href="@{'/show/'+'type?name=' + ${type.typeName}}" th:utext="${type.typeName}">Type</a>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
+
                     </div>
                 </div>
 
@@ -59,9 +72,10 @@
                         </div>
                     </div>
 
+
+
                     <div class="hero__item set-bg" data-setbg="img/banner.jpg">
                         <div class="hero__text">
-                            <!--                        <img th:src="@{img/banner.jpg}" alt="">-->
                             <span>FRUIT FRESH</span>
                             <h2>Vegetable <br/>100% Organic</h2>
                             <p>Free Pickup and Delivery Available</p>
@@ -76,3 +90,4 @@
     </section>
     <!-- Hero Section End -->
 </th:block>
+</html>
