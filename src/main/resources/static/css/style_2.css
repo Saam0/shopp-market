@@ -187,7 +187,8 @@
 .call__icon a {
     font-size: 12px;
     text-align: right;
-    letter-spacing: 3px;
+    /*letter-spacing: 3px;*/
+    padding: 8px 0;
 }
 
 .call__icon i {
@@ -674,6 +675,9 @@
 .card__akcia__badge a{
     color: white;
     text-decoration: none;
+}
+.card__item:hover{
+    cursor: pointer;
 }
 .card__item > i {
     position: absolute;

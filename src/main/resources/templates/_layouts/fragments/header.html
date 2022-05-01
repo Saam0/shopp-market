@@ -77,17 +77,25 @@
                 </div>
 
                 <div>
-                    <div class=" text-muted header__top__right__language">
+                    <div class=" text-muted header__top__right__language  " id="locales" >
                         <img th:src="@{img/interface/english.png}" alt="" src="">
                         <div>English</div>
                         <span class="arrow_carrot-down"></span>
-                        <ul>
-                            <li><a href="#">English</a></li>
-                            <li><a href="#">Armenian</a></li>
-                            <li><a href="#">Russian</a></li>
+                        <ul class="langlang">
+                            <li><a  href="#" >English</a></li>
+                            <li><a  href="#"  >Armenian</a></li>
+                            <li><a href="#" >Russian</a></li>
                         </ul>
                     </div>
                 </div>
+
+<!--                <div>-->
+<!--                    <select id="locales">-->
+<!--                        <option value=""></option>-->
+<!--                        <option value="en" th:text="#{lang.eng}"></option>-->
+<!--                        <option value="ru" >ru</option>-->
+<!--                    </select>-->
+<!--                </div>-->
                 <div>
                     <div class=" header__top__right__auth ml-4">
                         <a class="text-muted nav-link" href="#"><i class="fa fa-user"></i>Login</a>
@@ -147,6 +155,19 @@
 
     <!--        </div>-->
     <!--    </div>-->
+<!--    <script>-->
+<!--        $(document).ready(function() {-->
+<!--            $("#locales").change(function () {-->
+<!--                var selectedOption = $('#locales').val();-->
+<!--                if (selectedOption !== ''){-->
+<!--                    window.location.replace('?lang=' + selectedOption);-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
 </th:block>
+
+
+
 </body>
 </html>
