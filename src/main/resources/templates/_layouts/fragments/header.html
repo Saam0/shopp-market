@@ -1,120 +1,152 @@
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<th:block th:fragment="header" >
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>header</title>
+
+</head>
+<body>
+<th:block th:fragment="header">
 
     <!-- Header Section Begin -->
-    <header class="header" >
-        <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__left">
-                            <ul>
-                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                <li>Free Shipping for all Order of $99</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            </div>
-                            <div class="header__top__right__language">
-                                <img th:src="@{img/language.png}" alt="">
-                                <div>English</div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>
-                            </div>
-                            <div class="header__top__right__auth">
-                                <th:block sec:authorize="!isAuthenticated()">
-                                <a   href="" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user" ></i> <span th:utext="#{modal.user.login}"></span></a>
-                                <div   th:replace="_layouts/fragments/login :: login('loginModal')"></div>
-                                </th:block>
-                                <th:block sec:authorize="isAuthenticated()">
-                                    <a   th:href="@{/logout}"  ><i class="fa fa-sign-out" ></i> <span th:utext="#{modal.user.logOut}"></span></a>
-                                </th:block>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <header class="header">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="./index.html"><img th:src="@{img/logo.png}" alt=""></a>
+            <nav class="navbar  navbar-expand-lg navbar-light ">
+
+                <div class="navbar-brand col-md-2 col-6">
+                    <div class="logo">
+                        <a th:href="@{/index}" class="logo__link"><img th:src="@{/img/interface/logo.svg}"
+                                                                       alt="logo" src="">shopicon</a>
                     </div>
                 </div>
-                <div class="col-lg-9">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-expanded="false">
+                                <span class="pr-2" th:utext="#{header.topMenu.business}">business</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                    <div class="hero__search header__logo">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                    All Categories
-                                    <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
-                            </form>
+                                <li><a class="dropdown-item" href="#">Shop Details</a></li>
+                                <li><a class="dropdown-item" href="#">Shoping Cart</a></li>
+                                <li><a class="dropdown-item" href="#">Check Out</a></li>
+                                <li><a class="dropdown-item" href="#">Blog Details</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" th:utext="#{header.topMenu.recipes}">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" th:utext="#{header.topMenu.delivery}">Pages</a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" th:utext="#{header.topMenu.payment}">Payment</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" th:utext="#{header.topMenu.reviews}">Contact</a>
+                        </li>
+
+                    </ul>
+
+                    <div class="call__icon text-muted mr-4">
+                        <div><i class="fas fa-phone-alt"></i>
+                            <span th:utext="#{header.topMenu.phoneNumber}">+374-11-625-625</span>
                         </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
-                            </div>
-                        </div>
+                        <a class="nav-link text-muted" href="#" th:utext="#{header.topMenu.orderCall}">Order a call</a>
                     </div>
 
-
-                    <!--                    <nav class="header__menu">-->
-                    <!--                        <ul>-->
-                    <!--                            <li class="active"><a href="./index.html">Home</a></li>-->
-                    <!--                            <li><a href="./shop-grid.html">Shop</a></li>-->
-                    <!--                            <li><a href="#">Pages</a>-->
-                    <!--                                <ul class="header__menu__dropdown">-->
-                    <!--                                    <li><a href="./shop-details.html">Shop Details</a></li>-->
-                    <!--                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>-->
-                    <!--                                    <li><a href="./checkout.html">Check Out</a></li>-->
-                    <!--                                    <li><a href="./blog-details.html">Blog Details</a></li>-->
-                    <!--                                </ul>-->
-                    <!--                            </li>-->
-                    <!--                            <li><a href="./blog.html">Blog</a></li>-->
-                    <!--                            <li><a href="./contact.html">Contact</a></li>-->
-                    <!--                        </ul>-->
-                    <!--                    </nav>-->
+                    <!--                        <div class="call__icon">-->
+                    <!--                            <span><i class="fas fa-phone-alt"> </i></span>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="call__icon-text">-->
+                    <!--                            <span><i class="fas fa-phone-alt"> </i></span>-->
+                    <!--                            <div th:utext="#{header.topMenu.phoneNumber}">+374-11-625-625</div>-->
+                    <!--                        </div>-->
+                    <!--                        <span th:utext="#{header.topMenu.orderCall}">Order a call</span>-->
 
 
-                    <!--                </div>-->
-                    <!--                <div class="col-lg-3">-->
-                    <!--                    <div class="header__cart">-->
-                    <!--                        <ul>-->
-                    <!--                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>-->
-                    <!--                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>-->
-                    <!--                        </ul>-->
-                    <!--                        <div class="header__cart__price">item: <span>$150.00</span></div>-->
-                    <!--                    </div>-->
-                    <!--                </div>-->
                 </div>
-                <div class="humberger__open">
-                    <i class="fa fa-bars"></i>
+
+                <div>
+                    <div class=" text-muted header__top__right__language">
+                        <img th:src="@{img/interface/english.png}" alt="" src="">
+                        <div>English</div>
+                        <span class="arrow_carrot-down"></span>
+                        <ul>
+                            <li><a href="#">English</a></li>
+                            <li><a href="#">Armenian</a></li>
+                            <li><a href="#">Russian</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+                <div>
+                    <div class=" header__top__right__auth ml-4">
+                        <a class="text-muted nav-link" href="#"><i class="fa fa-user"></i>Login</a>
+                    </div>
+                </div>
+            </nav>
+
         </div>
+
     </header>
-    <!-- Header Section End -->
+
+
+    <!--    <div class="navbar">-->
+    <!--        <div class="container">-->
+    <!--            <div class="col-md-2 col-6">-->
+    <!--                <div class="logo">-->
+
+    <!--                    &lt;!&ndash;                        <img th:src="@{/img/logo/logo.jpg}" alt="logo" src="">&ndash;&gt;-->
+    <!--                    <a th:href="@{/index}" class="logo__link"><img th:src="@{/img/interface/logo.jpg}" alt="logo" src="">shopicon</a>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            <div class="col-md-10 col-lg-6 col-6 menu-container">-->
+    <!--                <i class="menu-toggle"></i>-->
+    <!--               <ul class="top-menu">-->
+    <!--                   <li class="top-menu__item"><a href="#" class="top-menu__link" th:utext="#{header.topMenu.business}">Business</a></li>-->
+    <!--                   <li class="top-menu__item"><a href="#" class="top-menu__link" th:utext="#{header.topMenu.recipes}">Recipes</a></li>-->
+    <!--                   <li class="top-menu__item"><a href="#" class="top-menu__link" th:utext="#{header.topMenu.delivery}">Delivery</a></li>-->
+    <!--                   <li class="top-menu__item"><a href="#" class="top-menu__link" th:utext="#{header.topMenu.payment}">Payment</a></li>-->
+    <!--                   <li class="top-menu__item"><a href="#" class="top-menu__link" th:utext="#{header.topMenu.reviews}">Reviews</a></li>-->
+    <!--               </ul>-->
+    <!--            </div>-->
+    <!--            <div class="col-md-2 d-none d-lg-block clock__icon">-->
+    <!--                <i class="fa-solid fa-clock-rotate-left fa-2xl"></i>-->
+    <!--                    <span th:utext="#{header.topMenu.phoneNumber}">phone number</span> <br>-->
+    <!--                    <a href="#" th:utext="#{header.topMenu.orderCall}">Order a call</a>-->
+    <!--            </div>-->
+    <!--            <div class="col-md-2 language__container">-->
+    <!--                <form action="#">-->
+    <!--                    <label for="locales" th:utext="#{choose.language}">Choose language</label>-->
+    <!--                    <select  id="locales">-->
+    <!--                        <option value="en" th:utext="#{lang.eng}"></option>-->
+    <!--                        <option value="arm" th:utext="#{lang.arm}"></option>-->
+    <!--                        <option value="ru" th:text="#{lang.ru}"></option>-->
+    <!--                    </select>-->
+    <!--                </form>-->
+    <!--&lt;!&ndash;                <div class="header__top__right__language">&ndash;&gt;-->
+    <!--&lt;!&ndash;                    <img src="img/language.png" alt="">&ndash;&gt;-->
+    <!--&lt;!&ndash;                    <div id="locales">English</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;                    <span class="arrow_carrot-down"></span>&ndash;&gt;-->
+    <!--&lt;!&ndash;                    <ul>&ndash;&gt;-->
+    <!--&lt;!&ndash;                        <li><a href="#">Spanis</a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;                        <li><a href="#">English</a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;                    </ul>&ndash;&gt;-->
+    <!--&lt;!&ndash;                </div>&ndash;&gt;-->
+
+    <!--            </div>-->
+
+    <!--        </div>-->
+    <!--    </div>-->
 </th:block>
+</body>
 </html>
