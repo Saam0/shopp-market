@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>cards</title>
+
+</head>
+<body>
+<th:block th:fragment="cards">
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+            <div class="col mb-4">
+                <div class="card">
+                    <img src="" th:src="@{/img/product/ananas.webp}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Ananas</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4">
+                <div class="card">
+                    <img src="" th:src="@{/img/product/apelsin.webp}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Apelsin</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4">
+                <div class="card">
+                    <img src="" th:src="@{/img/product/avocado.webp}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Avocado</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4">
+                <div class="card">
+                    <img src="" th:src="@{/img/product/dzmeruk.webp}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Dzmeruk</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</th:block>
+</body>
+</html>

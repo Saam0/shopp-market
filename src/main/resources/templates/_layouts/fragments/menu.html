@@ -1,93 +1,138 @@
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<th:block th:fragment="menu"
-          xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+</head>
+<body>
+<th:block th:fragment="menu">
 
-    <!-- Hero Section Begin -->
-    <section class="hero">
-        <div class="container">
-            <div class="row">
+    <header class="header shadow-sm mb-3">
+        <div class="container ">
+            <nav class="navbar  navbar-expand-lg navbar-light  ">
+                <!--                <a class="navbar-brand" href="#">Navbar</a>-->
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#menuNavbar" aria-controls="menuNavbar"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="menuNavbar">
+                    <ul class="navbar-nav ">
+                        <li class="nav-item dropdown ">
+
+                            <a type="button" class="nav-link  btn btn__catalog text-light " href="#" id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown" aria-expanded="false">
+                                <span class="pr-2" th:utext="#{header.navmenu.catalog}">Catalog</span>
+                                <i class=" fa-solid fa-bars-staggered "></i>
+
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                <li th:each="global:${catalog}">
+                                    <a class="dropdown-item" href="#" th:utext="${global.globalTypeName}">Global
+                                        type</a>
+
+                                    <ul class="dropdown-menu dropdown-submenu">
+                                        <li th:each="subType:${global.subTypes}">
+                                            <a class="dropdown-item" href="#" th:utext="${subType.subTypeName}">Sub
+                                                type</a>
+                                            <ul class="dropdown-menu dropdown-submenu">
+                                                <li th:each="type:${subType.types}">
+                                                    <a class="dropdown-item"
+                                                       th:href="@{'/show/'+'type?name=' + ${type.typeName}}"
+                                                       th:utext="${type.typeName}">Type</a>
+                                                </li>
+                                            </ul>
+
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item sale__item mx-2">
+<!--                            <img th:src="@{img/interface/actions2x.png.webp}" alt="" src="">-->
+<!--                            <div>-->
+<!--                                sale-->
+<!--                            </div>-->
+                            <a class="nav-link" href="#"><img th:src="@{img/interface/actions2x.png.webp}" alt="" src="">
+                                <span class="ml-2" th:utext="#{header.navmenu.sale}">Sale</span></a>
+                            <ul>
+                                <li><a href="#" th:utext="#{header.navmenu.sale.promotion}">Promotion</a></li>
+                                <li><a href="#" th:utext="#{header.navmenu.sale.sellOut}">Sell-out</a></li>
+                                <li><a href="#" th:utext="#{header.navmenu.sale.discounts}">Discounts</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item new__item mx-2">
+                            <a class="nav-link" href="#"><img th:src="@{img/interface/novelties2x.png.webp}" alt=""
+                                                              src="">
+                                <span class="ml-2" th:utext="#{header.navmenu.new}">New</span></a>
+                        </li>
 
 
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>All departments</span>
-                        </div>
-                        <ul style=" display: none">
-                            <li   th:each="global:${catalog}">
-                                <a href="#" th:utext="${global.globalTypeName}">Global type</a>
-
-                                <ul  style=" display: none;">
-                                    <li th:each="subType:${global.subTypes}" >
-                                        <a href="#" th:utext="${subType.subTypeName}">Sub type</a>
-
-                                        <ul style=" display: none;">
-                                            <li th:each="type:${subType.types}">
-                                                <a  th:href="@{'/show/'+'type?name=' + ${type.typeName}}" th:utext="${type.typeName}">Type</a>
-                                            </li>
-                                        </ul>
-
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-
+                    </ul>
+                    <form class="search__input form-inline ml-auto my-2 my-lg-0">
+                        <input class="form-control" type="search" placeholder="Search"
+                               aria-label="Search">
+                        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"><i
+                                class="fas fa-search"></i></button>
+                    </form>
+                    <div class="favorite__icon ml-4">
+                        <i class="fa-regular fa-heart  "></i>
+                    </div>
+                    <div class="cart__icon ml-4">
+                        <i class="fas fa-shopping-cart "></i>
                     </div>
                 </div>
+            </nav>
 
-
-                <div class="col-lg-9">
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <nav class="header__menu">
-                                <ul>
-                                    <li class="active"><a href="./index.html">Home</a></li>
-                                    <li><a href="./shop-grid.html">Shop</a></li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="header__menu__dropdown">
-                                            <li><a href="./shop-details.html">Shop Details</a></li>
-                                            <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                            <li><a href="./checkout.html">Check Out</a></li>
-                                            <li><a href="./blog-details.html">Blog Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="./blog.html">Blog</a></li>
-                                    <li><a href="./contact.html">Contact</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <div class="header__cart">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                                </ul>
-                                <div class="header__cart__price">item: <span>$150.00</span></div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="hero__item set-bg" data-setbg="img/banner.jpg">
-                        <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br/>100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
         </div>
-    </section>
-    <!-- Hero Section End -->
+
+    </header>
+
+
+    <!--    <header class="header">-->
+    <!--        <div class="container">-->
+    <!--            <div class="row">-->
+
+    <!--                <div class="col-lg-6">-->
+    <!--                    <nav class="header__menu">-->
+    <!--                        <ul>-->
+    <!--                            <li class="active"><a href="./index.html">Home</a></li>-->
+    <!--                            <li><a href="./shop-grid.html">Shop</a></li>-->
+    <!--                            <li><a href="#">Pages</a>-->
+    <!--                                <ul class="header__menu__dropdown">-->
+    <!--                                    <li><a href="./shop-details.html">Shop Details</a></li>-->
+    <!--                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>-->
+    <!--                                    <li><a href="./checkout.html">Check Out</a></li>-->
+    <!--                                    <li><a href="./blog-details.html">Blog Details</a></li>-->
+    <!--                                </ul>-->
+    <!--                            </li>-->
+    <!--                            <li><a href="./blog.html">Blog</a></li>-->
+    <!--                            <li><a href="./contact.html">Contact</a></li>-->
+    <!--                        </ul>-->
+    <!--                    </nav>-->
+    <!--                </div>-->
+    <!--                <div class="col-lg-3">-->
+    <!--                    <div class="header__cart">-->
+    <!--                        <ul>-->
+    <!--                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>-->
+    <!--                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>-->
+    <!--                        </ul>-->
+    <!--                        <div class="header__cart__price">item: <span>$150.00</span></div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            <div class="humberger__open">-->
+    <!--                <i class="fa fa-bars"></i>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </header>-->
+
 </th:block>
+</body>
 </html>
