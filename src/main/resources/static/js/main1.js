@@ -81,9 +81,29 @@ $(function () {
         else if (e.target.tagName == 'BUTTON') return true;
         else if (e.target.tagName == 'I') return true;
         else {
-            window.location.href = $(e.currentTarget).attr('data-url');
+            window.location.href = $(e.currentTarget).attr('href');
         }
         return false;
     });
+});
+
+
+
+$(function (){
+    $('.but').click(function (){
+
+        // $.ajax('/show/get/products',function (result, status){
+        //     console.log(result.productName);
+        // })
+
+        $.ajax({
+            url:"/get/product",
+            success:function (result){
+                console.log(result.totalPrice);
+                $('.aaaaa').text(result.productName);
+            }
+        });
+    });
+
 });
 

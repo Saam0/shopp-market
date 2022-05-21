@@ -23,201 +23,209 @@
 
 
 <div layout:fragment="content">
+    <div class="container">
 
-    <form class="form" action="#" th:action="@{/product/add}" method="post" th:object="${productModel}"
-          enctype="multipart/form-data">
+        <form class="form" action="#" th:action="@{/product/add}" method="post" th:object="${productModel}"
+              enctype="multipart/form-data">
 
-        <!--                    Product Name-->
-        <div class="form-group">
-            <label class="control-label" for="productName"
-                   th:utext="#{label.product.name}">Product name:</label>
-            <input type="text" class="form-control" id="productName"
-                   th:field="*{productName}" th:errorclass="is-invalid">
-            <span class="invalid-feedback" th:each="error: ${#fields.errors('productName')}"
-                  th:utext="${error}">Validation error</span>
-        </div>
+            <!--                    Product Name-->
+            <div class="form-group">
+                <label class="control-label" for="productName"
+                       th:utext="#{label.product.name}">Product name:</label>
+                <input type="text" class="form-control" id="productName"
+                       th:field="*{productName}" th:errorclass="is-invalid">
+                <span class="invalid-feedback" th:each="error: ${#fields.errors('productName')}"
+                      th:utext="${error}">Validation error</span>
+            </div>
 
-        <!--                    Department-->
-        <div class="form-row ">
-<!--            <div class="col-sm-4">-->
-<!--                <div class="form-group">-->
-<!--                    <label class="control-label col-xs-3" for="globalType"-->
-<!--                           th:utext="#{label.product.globalType}">Department:</label>-->
-<!--                    <select id="globalType" class="form-control select2-single"-->
-<!--                            th:field="*{type}">-->
-<!--                        <option value="">Search department...</option>-->
-<!--                        &lt;!&ndash;                        <option th:each="type : ${typeList}" th:utext="${type.typeName}" th:value="${type.id}">Catalog&ndash;&gt;-->
-<!--                        &lt;!&ndash;                        </option>&ndash;&gt;-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--                    Department-->
+            <div class="form-row ">
+                <!--            <div class="col-sm-4">-->
+                <!--                <div class="form-group">-->
+                <!--                    <label class="control-label col-xs-3" for="globalType"-->
+                <!--                           th:utext="#{label.product.globalType}">Department:</label>-->
+                <!--                    <select id="globalType" class="form-control select2-single"-->
+                <!--                            th:field="*{type}">-->
+                <!--                        <option value="">Search department...</option>-->
+                <!--                        &lt;!&ndash;                        <option th:each="type : ${typeList}" th:utext="${type.typeName}" th:value="${type.id}">Catalog&ndash;&gt;-->
+                <!--                        &lt;!&ndash;                        </option>&ndash;&gt;-->
+                <!--                    </select>-->
+                <!--                </div>-->
+                <!--            </div>-->
 
-<!--            &lt;!&ndash;                    Category&ndash;&gt;-->
-<!--            <div class="col-sm-4">-->
-<!--                <div class="form-group">-->
-<!--                    <label class="control-label" for="category"-->
-<!--                           th:utext="#{label.product.subType}">Category:</label>-->
-<!--                    <select id="category" class="form-control select2-single"-->
-<!--                            th:field="*{type}">-->
-<!--                        <option value="">Search category...</option>-->
-<!--                        &lt;!&ndash;                        <option th:each="type : ${typeList}" th:utext="${type.typeName}" th:value="${type.id}">Catalog&ndash;&gt;-->
-<!--                        &lt;!&ndash;                        </option>&ndash;&gt;-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--            </div>-->
-            <!--                    Type-->
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label class="control-label " for="type" th:utext="#{label.product.type}">Type:</label>
-                    <select id="type" class="form-control select2-single"
-                            th:field="${productModel.type.typeName}" name="id" th:errorclass="is-invalid">
-                        <option value="">Search type...</option>
-                        <option th:each="type : ${typeList}" th:utext="${type.typeName}" th:value="${type.typeName}" >Catalog
+                <!--            &lt;!&ndash;                    Category&ndash;&gt;-->
+                <!--            <div class="col-sm-4">-->
+                <!--                <div class="form-group">-->
+                <!--                    <label class="control-label" for="category"-->
+                <!--                           th:utext="#{label.product.subType}">Category:</label>-->
+                <!--                    <select id="category" class="form-control select2-single"-->
+                <!--                            th:field="*{type}">-->
+                <!--                        <option value="">Search category...</option>-->
+                <!--                        &lt;!&ndash;                        <option th:each="type : ${typeList}" th:utext="${type.typeName}" th:value="${type.id}">Catalog&ndash;&gt;-->
+                <!--                        &lt;!&ndash;                        </option>&ndash;&gt;-->
+                <!--                    </select>-->
+                <!--                </div>-->
+                <!--            </div>-->
+                <!--                    Type-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label " for="type" th:utext="#{label.product.type}">Type:</label>
+                        <select id="type" class="form-control select2-single"
+                                th:field="${productModel.type.typeName}" name="id" th:errorclass="is-invalid">
+                            <option value="">Search type...</option>
+                            <option th:each="type : ${typeList}" th:utext="${type.typeName}"
+                                    th:value="${type.typeName}">Catalog
+                            </option>
+                        </select>
+                        <span class="invalid-feedback"
+                              th:each="error: ${#fields.errors('${productModel.type.typeName}')}"
+                              th:utext="${error}">Validation error</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--                    Supplier-->
+            <div class="form-group">
+
+                <label class="control-label" for="supplier"
+                       th:utext="#{label.product.supplierName}">Supplier name:</label>
+                <div class="input-group">
+                    <select id="supplier" class="form-control select2-single"
+                            th:field="${productModel.stock.supplier.supplierName}" name="id" th:errorclass="is-invalid">
+                        <option value="">Search category...</option>
+                        <option th:each="supplier: ${supplierList}" th:utext="${supplier.supplierName}"
+                                th:value="${supplier.supplierName}">Search category...
                         </option>
                     </select>
-                    <span class="invalid-feedback" th:each="error: ${#fields.errors('${productModel.type.typeName}')}"
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button"
+                                th:utext="#{label.product.supplierName.add}">Add
+                        </button>
+                    </div>
+                    <span class="invalid-feedback"
+                          th:each="error: ${#fields.errors('${productModel.stock.supplier.supplierName}')}"
                           th:utext="${error}">Validation error</span>
                 </div>
             </div>
-        </div>
 
 
-        <!--                    Supplier-->
-        <div class="form-group">
-
-            <label class="control-label" for="supplier"
-                   th:utext="#{label.product.supplierName}">Supplier name:</label>
-            <div class="input-group">
-                <select id="supplier" class="form-control select2-single"
-                       th:field = "${productModel.stock.supplier.supplierName}" name="id" th:errorclass="is-invalid">
-                    <option value="">Search category...</option>
-                    <option th:each="supplier: ${supplierList}" th:utext="${supplier.supplierName}"  th:value="${supplier.supplierName}">Search category...</option>
-                </select>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="button"
-                            th:utext="#{label.product.supplierName.add}">Add
-                    </button>
+            <div class="form-row">
+                <!--                    Product quantity-->
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label" for="productQuantity"
+                               th:utext="#{label.product.quantity}">Product quantity:</label>
+                        <input type="number" class="form-control" id="productQuantity"
+                               th:field="${productModel.stock.quantity}" th:errorclass="is-invalid">
+                        <!--                                        <span class="invalid-feedback" th:each="error: ${#fields.errors(${productModel.stock.quantity})}"-->
+                        <!--                                              th:utext="${error}">Validation error</span>-->
+                    </div>
                 </div>
-                <span class="invalid-feedback" th:each="error: ${#fields.errors('${productModel.stock.supplier.supplierName}')}"
-                      th:utext="${error}">Validation error</span>
-            </div>
-        </div>
+                <!--                    Product price-->
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label" for="productPrice"
+                               th:utext="#{label.product.price}">Product price:</label>
+                        <input type="number" class="form-control" id="productPrice"
+                               th:field="${productModel.stock.purchasePrice}" th:errorclass="is-invalid">
+                        <!--                                        <span class="invalid-feedback" th:each="error: ${#fields.errors(${productModel.stock.purchasePrice})}"-->
+                        <!--                                              th:utext="${error}">Validation error</span>-->
+                        <!--                    <span class="invalid-feedback" th:errors=" ${productModel.stock.purchasePrice}">Validation error</span>-->
 
-
-        <div class="form-row">
-            <!--                    Product quantity-->
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label class="control-label" for="productQuantity"
-                           th:utext="#{label.product.quantity}">Product quantity:</label>
-                    <input type="number" class="form-control" id="productQuantity"
-                           th:field="${productModel.stock.quantity}" th:errorclass="is-invalid">
-<!--                                        <span class="invalid-feedback" th:each="error: ${#fields.errors(${productModel.stock.quantity})}"-->
-<!--                                              th:utext="${error}">Validation error</span>-->
+                    </div>
                 </div>
-            </div>
-            <!--                    Product price-->
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label class="control-label" for="productPrice"
-                           th:utext="#{label.product.price}">Product price:</label>
-                    <input type="number" class="form-control" id="productPrice"
-                           th:field="${productModel.stock.purchasePrice}" th:errorclass="is-invalid">
-<!--                                        <span class="invalid-feedback" th:each="error: ${#fields.errors(${productModel.stock.purchasePrice})}"-->
-<!--                                              th:utext="${error}">Validation error</span>-->
-<!--                    <span class="invalid-feedback" th:errors=" ${productModel.stock.purchasePrice}">Validation error</span>-->
+                <!--                    Product unit-->
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label" for="productUnit"
+                               th:utext="#{label.product.unit}">Product unit:</label>
+                        <input type="text" class="form-control" id="productUnit"
+                               th:field="${productModel.stock.unitOfMeasurement}" th:errorclass="is-invalid">
+                        <!--                                        <span class="invalid-feedback" th:each="error: ${#fields.errors(${productModel.stock.unitOfMeasurement})}"-->
+                        <!--                                              th:utext="${error}">Validation error</span>-->
+                        <span class="invalid-feedback" th:errors=" ${productModel.stock.unitOfMeasurement}">Validation error</span>
 
+                    </div>
                 </div>
-            </div>
-            <!--                    Product unit-->
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label class="control-label" for="productUnit"
-                           th:utext="#{label.product.unit}">Product unit:</label>
-                    <input type="text" class="form-control" id="productUnit"
-                           th:field="${productModel.stock.unitOfMeasurement}" th:errorclass="is-invalid">
-<!--                                        <span class="invalid-feedback" th:each="error: ${#fields.errors(${productModel.stock.unitOfMeasurement})}"-->
-<!--                                              th:utext="${error}">Validation error</span>-->
-                    <span class="invalid-feedback" th:errors=" ${productModel.stock.unitOfMeasurement}">Validation error</span>
 
-                </div>
-            </div>
-
-            <!--                    Purchase date-->
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label class="control-label" for="purchaseDate" th:utext="#{label.product.purchaseDate}">Purchase
-                        date:</label>
-                    <div class="input-group date">
-                        <input type="text" class="form-control" id="purchaseDate" th:errorclass="is-invalid"
-                               th:field="${productModel.stock.purchaseDate}" autocomplete="off">
-                        <div class="input-group-append">
+                <!--                    Purchase date-->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label" for="purchaseDate" th:utext="#{label.product.purchaseDate}">Purchase
+                            date:</label>
+                        <div class="input-group date">
+                            <input type="text" class="form-control" id="purchaseDate" th:errorclass="is-invalid"
+                                   th:field="${productModel.stock.purchaseDate}" autocomplete="off">
+                            <div class="input-group-append">
                                     <span class="input-group-text"><i class="fa fa-calendar"
                                                                       aria-hidden="true"></i></span>
-                        </div>
-                        <span class="invalid-feedback" th:each="error: ${#fields.errors('${productModel.stock.purchaseDate}')}"
-                              th:utext="${error}">Validation error</span>
-<!--                        <span class="invalid-feedback" th:errors=" ${productModel.stock.purchaseDate}">Validation error</span>-->
+                            </div>
+                            <span class="invalid-feedback"
+                                  th:each="error: ${#fields.errors('${productModel.stock.purchaseDate}')}"
+                                  th:utext="${error}">Validation error</span>
+                            <!--                        <span class="invalid-feedback" th:errors=" ${productModel.stock.purchaseDate}">Validation error</span>-->
 
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="form-row">
-            <!--                    add small photo-->
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="custom-file">
-                            <label class="custom-file-label" for="addSmallPhoto"
-                                   th:utext="#{label.product.choosePicture.sm}">Choose
-                                file</label>
-                            <input type="file" class="custom-file-input" id="addSmallPhoto" name="file" >
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="form-row">
+                <!--                    add small photo-->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <label class="custom-file-label" for="addSmallPhoto"
+                                       th:utext="#{label.product.choosePicture.sm}">Choose
+                                    file</label>
+                                <input type="file" class="custom-file-input" id="addSmallPhoto" name="file">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<!--            &lt;!&ndash;                    add medium photo&ndash;&gt;-->
-<!--            <div class="col-md-6">-->
-<!--                <div class="form-group">-->
-<!--                    <div class="input-group">-->
-<!--                        <div class="custom-file">-->
-<!--                            <label class="custom-file-label" for="addMediumPhoto"-->
-<!--                                   th:utext="#{label.product.choosePicture.md}">Choose-->
-<!--                                file</label>-->
-<!--                            <input type="file" class="custom-file-input" id="addMediumPhoto"-->
-<!--                                   th:field="${productModel.picture.mdPictureName}" th:errorclass="is-invalid">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-        </div>
-
-        <!--                    add product description-->
-
-        <div class="form-group">
-            <label class="control-label" for="productDescription"
-                   th:utext="#{label.product.description}">product description</label>
-            <textarea type="text" class="form-control" id="productDescription"
-                      th:field="${productModel.productDetails.productDescription}" th:errorclass="is-invalid"
-                      rows="5"></textarea>
-            <span class="invalid-feedback" th:each="error: ${#fields.errors('${productModel.productDetails.productDescription}')}"
-                  th:utext="${error}">Validation error</span>
-            <!--                <span class="invalid-feedback" th:each="error: ${#fields.errors('productName')}"-->
-            <!--                      th:utext="${error}">Validation error</span>-->
-        </div>
-
-        <div class="form-group">
-            <div class="col-xs-offset-3 col-xs-9">
-                <input type="submit" class="btn btn-primary" value="Submit">
-                <input type="reset" class="btn btn-outline-secondary" value="Reset form">
-                <a class="btn btn-outline-secondary" th:href="@{/}">Veradardz</a>
+                <!--            &lt;!&ndash;                    add medium photo&ndash;&gt;-->
+                <!--            <div class="col-md-6">-->
+                <!--                <div class="form-group">-->
+                <!--                    <div class="input-group">-->
+                <!--                        <div class="custom-file">-->
+                <!--                            <label class="custom-file-label" for="addMediumPhoto"-->
+                <!--                                   th:utext="#{label.product.choosePicture.md}">Choose-->
+                <!--                                file</label>-->
+                <!--                            <input type="file" class="custom-file-input" id="addMediumPhoto"-->
+                <!--                                   th:field="${productModel.picture.mdPictureName}" th:errorclass="is-invalid">-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--            </div>-->
             </div>
-        </div>
-    </form>
+
+            <!--                    add product description-->
+
+            <div class="form-group">
+                <label class="control-label" for="productDescription"
+                       th:utext="#{label.product.description}">product description</label>
+                <textarea type="text" class="form-control" id="productDescription"
+                          th:field="${productModel.productDetails.productDescription}" th:errorclass="is-invalid"
+                          rows="5"></textarea>
+                <span class="invalid-feedback"
+                      th:each="error: ${#fields.errors('${productModel.productDetails.productDescription}')}"
+                      th:utext="${error}">Validation error</span>
+                <!--                <span class="invalid-feedback" th:each="error: ${#fields.errors('productName')}"-->
+                <!--                      th:utext="${error}">Validation error</span>-->
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-offset-3 col-xs-9">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <input type="reset" class="btn btn-outline-secondary" value="Reset form">
+                    <a class="btn btn-outline-secondary" th:href="@{/}">Veradardz</a>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
-
 
 
 <th:block layout:fragment="scripts">

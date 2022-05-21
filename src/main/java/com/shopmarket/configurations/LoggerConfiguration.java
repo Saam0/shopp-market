@@ -14,7 +14,7 @@ public class LoggerConfiguration {
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public Logger logger(){
-        return LoggerFactory.getLogger("am.shopmarket");
+        return LoggerFactory.getLogger("com.shopmarket");
     }
 
 }

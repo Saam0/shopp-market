@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>index</title>
+    <script src="../static/js/bootstrap-input-spinner.js"></script>
 </head>
 <body>
 
@@ -12,9 +13,10 @@
 <!--    <div class="row">-->
 
 <div layout:fragment="content">
-<!--                <div th:replace="_layouts/fragments/carusel :: carusel"> This header content is going to be replaced.</div>-->
+                <div th:replace="_layouts/fragments/carusel :: carusel"> This header content is going to be replaced.</div>
 <!--    <div th:replace="_layouts/fragments/cards :: cards"> This header content is going to be replaced.</div>-->
-    <div th:replace="_layouts/fragments/product-details :: product-details"> This header content is going to be replaced.</div>
+<!--    <div th:replace="_layouts/fragments/product-details :: product-details"> This header content is going to be replaced.</div>-->
+<!--    <div th:replace="_layouts/fragments/cart :: cart"> Cart</div>-->
 
     <!--            <div th:replace="_layouts/fragments/carousel::carousel"> aaa</div>-->
 
@@ -27,6 +29,22 @@
 </div>
 
 <div layout:fragment="scripts">
+    <script th:src="@{/js/bootstrap-input-spinner.js}"  type="text/javascript"></script>
+
+<!--    <script>-->
+<!--        var $input = $("input[type='number']");-->
+<!--        $input.inputSpinner({-->
+<!--            decrementButton: "<i class=\"cart__spinner_btn fa-solid fa-circle-minus \"></i>", // button text-->
+<!--            incrementButton: "<i class=\"cart__spinner_btn fa-solid fa-circle-plus \"></i>", // ..-->
+<!--            groupClass: 'input', // css class of the resulting input-group-->
+<!--            buttonsClass: "",-->
+<!--            buttonsOnly:true-->
+<!--        })-->
+<!--    </script>-->
+
+
+
+
 <!--    <script>-->
 <!--        $(document).ready(function() {-->
 <!--            $("#locales").change(function () {-->

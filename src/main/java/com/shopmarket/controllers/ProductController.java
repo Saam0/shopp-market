@@ -1,5 +1,6 @@
 package com.shopmarket.controllers;
 
+import com.shopmarket.models.CartItem;
 import com.shopmarket.models.Product;
 import com.shopmarket.models.catalog.Type;
 import com.shopmarket.services.CatalogService;
@@ -42,6 +43,7 @@ public class ProductController {
                     .orElseThrow(() -> new NullPointerException("No products found with type: " + name)).getProducts();
             model.addAttribute("productList", productList);
             productList.stream().map(Product::getProductName).forEach(System.out::println);
+            model.addAttribute("cartItem",new CartItem());
         } catch (NullPointerException e) {
             e.getMessage();
             String errMessage = messages.getMessage("message.product.type.error", null, request.getLocale());

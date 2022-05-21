@@ -1,6 +1,9 @@
 package com.shopmarket.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.shopmarket.validation.PasswordMatches;
 import com.shopmarket.validation.ValidEmail;
 import com.shopmarket.validation.ValidPassword;
@@ -63,6 +66,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses;
 
+    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private Cart cart;
 

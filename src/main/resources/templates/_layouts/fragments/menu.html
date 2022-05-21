@@ -56,7 +56,7 @@
 
                         <li class="nav-item sale__item mx-2">
 
-                            <a class="nav-link" href="#"><img th:src="@{img/interface/actions2x.png.webp}" alt="" src="">
+                            <a class="nav-link" href="#"><img th:src="@{img/interface/sale.webp}" alt="">
                                 <span class="ml-2" th:utext="#{header.navmenu.sale}">Sale</span></a>
                             <ul>
                                 <li><a href="#" th:utext="#{header.navmenu.sale.promotion}">Promotion</a></li>
@@ -65,8 +65,7 @@
                             </ul>
                         </li>
                         <li class="nav-item new__item mx-2">
-                            <a class="nav-link" href="#"><img th:src="@{img/interface/novelties2x.png.webp}" alt=""
-                                                              src="">
+                            <a class="nav-link" href="#"><img th:src="@{img/interface/new.webp}" alt="">
                                 <span class="ml-2" th:utext="#{header.navmenu.new}">New</span></a>
                         </li>
 
@@ -82,7 +81,11 @@
                         <i class="fa-regular fa-heart  "></i>
                     </div>
                     <div class="cart__icon ml-4">
-                        <i class="fas fa-shopping-cart "></i>
+                        <a href="#" th:href="@{/cart/my-cart/}"><i class="fas fa-shopping-cart "></i></a>
+                        <span id="cart-total-items" >
+                            <span class="badge badge-warning badge-pill" th:if="${session.cart}!=null"
+                                  th:utext="${session.cart.itemsNumber}"> </span>
+                        </span>
                     </div>
                 </div>
             </nav>

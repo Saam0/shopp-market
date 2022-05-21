@@ -1,5 +1,7 @@
 package com.shopmarket.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,18 +14,12 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-/*    @MapsId("Id")
-    @JoinColumn(name = "cart_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)*/
-
-    @MapsId
+    @JsonManagedReference
     @JoinColumn(name = "cart_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Cart cart;
 
-    /* @MapsId("Id")
-     @JoinColumn(name = "product_id", referencedColumnName = "id")
-     @ManyToOne(optional = false, fetch = FetchType.EAGER)*/
+
     @MapsId
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
@@ -32,9 +28,8 @@ public class CartItem {
     private double quantity;
 
 
-
     public void setCart(Cart cart) {
-        setCart(cart,false);
+        setCart(cart, false);
     }
 
     public void setCart(Cart cart, boolean otherSideHasBeenSet) {
@@ -44,9 +39,11 @@ public class CartItem {
         }
         cart.addCartItem(this, true);
     }
+
     public void removeCart(Cart cart) {
-        removeCart(cart,false);
+        removeCart(cart, false);
     }
+
     public void removeCart(Cart cart, boolean otherSideHasBeenSet) {
         this.cart = null;
         if (otherSideHasBeenSet) {

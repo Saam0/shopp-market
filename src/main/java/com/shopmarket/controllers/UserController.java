@@ -45,7 +45,7 @@ public class UserController {
         List<Address> addresses = new ArrayList<>();
         addresses.add(address);
         user.setAddresses(addresses);
-        user.setCart(new Cart());
+//        user.setCart(new Cart());
 
         model.addAttribute("userForm", user);
         return "user/registration";

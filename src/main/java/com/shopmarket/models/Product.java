@@ -1,5 +1,6 @@
 package com.shopmarket.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.shopmarket.models.catalog.Type;
 import lombok.Data;
 
@@ -33,6 +34,7 @@ public class Product {
     @OneToOne(mappedBy = "product")
     private Stock stock;
 
+//    @JsonBackReference
     @Valid
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "type_id")

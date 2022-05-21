@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{_layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <!--    <script src="../static/js/bootstrap-input-spinner.js"></script>-->
+</head>
+<body>
+
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <h3 class="mb-4" th:utext="#{title.cart.cart}">Cart</h3>
+
+                <table class="table cart__table">
+                    <tbody>
+                    <tr th:each="item:${myCart.cartItems}" class="cart__table_row">
+                        <td class="cart__table_img"><img th:src="@{'/' + ${item.product.picture.smPictureName}}" alt="">
+                        </td>
+                        <td><h6>
+                            <a th:href="@{'/cart/item/'+ ${item.id}}"><span
+                                    th:utext="${item.product.productName}"></span></a>
+                        </h6>
+                        </td>
+                        <td>
+                            <h6 class="text-muted">Nearest delivery:</h6>
+                            <h6>Tomorrow</h6>
+                        </td>
+                        <td>
+                            <div>
+                                <form id="myForm" method="post" th:action="@{/cart}">
+                                    <div class="cart__spinner form-group">
+                                        <input type="hidden" class="form-control" id="productId" th:value="${item.id}"
+                                               name="productId">
+                                        <label for="quantity"></label>
+                                        <input value="0" th:value="${item.quantity}" min="0" max="1000" type="number"
+                                               name=quantity class="form-control-sm" id="quantity"
+                                               autocomplete="off"/>
+                                        <input type="hidden" class="form-control" id="itemPrice"
+                                               th:value="${item.product.stock.purchasePrice}"
+                                               name="itemPrice">
+                                    </div>
+                                </form>
+                            </div>
+                        </td>
+                        <td id="items__sum" th:utext="${item.quantity * item.product.stock.purchasePrice}">1500</td>
+                        <td id="items__delete" class="text-muted">
+                            <a th:href="@{'/cart/del-item/'+'item?id=' + ${item.id}}">
+                                <i class="text-muted fa-solid fa-trash-can"></i></a>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4" checkout__block>
+                <h6 class="mb-2 clear__cart" >
+                    <a class="text-muted mr-5" th:href="@{/index}"><i class="fa-solid fa-house"></i></i>
+                        <span  th:utext="#{title.cart.goHomePage}">Home</span></a>
+                </h6>
+                <h6 class="mb-2  clear__cart" >
+                    <a class="text-muted ml-5" th:href="@{/cart/clear-cart}"><i class="fa-solid fa-trash-can"></i>
+                    <span  th:utext="#{title.cart.clear}">Clear shopping cart</span></a>
+                </h6>
+
+                <div class="card  ">
+                    <ul class="list-group list-group-flush cart__checkout ">
+                        <li class="list-group-item ">
+                            <div>
+                                <form>
+                                    <div class="form-row">
+                                        <div class="col h6" th:utext="#{title.cart.isPromo}">
+                                            There is promo code?
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="Promo code">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="cart__checkout_price_weight">
+                                <p class="h6">Order price:</p>
+                                <p id="orderPrice" class="h6" th:utext="${myCart.getTotalPrice()}">25000 amd</p>
+                            </div>
+                            <div class="cart__checkout_price_weight">
+                                <p class="h6">Order weight:</p>
+                                <p class="h6">15 kg</p>
+                            </div>
+
+                        </li>
+                        <li class="list-group-item">
+                            <div class="cart__checkout_price_weight">
+                                <p class="h4">Total payable:</p>
+                                <p id="totalPrice" class="h4" th:utext="${myCart.getTotalPrice()}">50 000 amd</p>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="cart__checkout_btn">
+                                <button type="submit" class="btn"><span>Checkout</span>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div layout:fragment="scripts">
+    <script th:src="@{/js/bootstrap-input-spinner.js}" type="text/javascript"></script>
+
+    <script>
+        var $input = $("input[type='number']");
+        $input.inputSpinner({
+            decrementButton: "<i class=\"cart__spinner_btn fa-solid fa-circle-minus \"></i>", // button text
+            incrementButton: "<i class=\"cart__spinner_btn fa-solid fa-circle-plus \"></i>", // ..
+            groupClass: 'input', // css class of the resulting input-group
+            buttonsClass: "",
+            buttonsOnly: true
+        })
+    </script>
+
+    <script>
+
+        $('button.btn-minus, button.btn-plus ').click(function () {
+            var $this = $(this);
+            var form = $this.parents('form:first');
+            var url = form.attr('action');
+            var jsonData = JSON.stringify(form.serializeObject());
+            var itemPrice = form.serializeObject().itemPrice;
+            var quantity = form.serializeObject().quantity;
+
+
+            $.ajax({
+                type: "post",
+                url: url,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: jsonData,
+
+                success: function (data) {
+                    var totalItems = data["itemsNumber"];
+                    var totalPrice = data["totalPrice"];
+
+                    // var bb = JSON.stringify(form.serializeObject(), ["productId"])
+
+                    $('#orderPrice').empty().html('<h6>' + totalPrice + '</h6>');
+                    $('#totalPrice').empty().html('<h4>' + totalPrice + '</h4>');
+                    $('#items__sum').empty().html('<td >' + itemPrice * quantity + '</td>');
+                    $('#cart-total-items').empty().html('<span class="badge badge-warning ">' + totalItems + '</span>');
+
+
+                    // console.log(totalItems);
+                    // alert(itemPrice);
+                },
+                error: function () {
+                    alert("Что-то пошло не так.\nПопробуйте добавить товар ещё раз.");
+                }
+            });
+        });
+        $.fn.serializeObject = function () {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function () {
+                if (o[this.name]) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+
+
+    </script>
+
+</div>
+</body>
+</html>

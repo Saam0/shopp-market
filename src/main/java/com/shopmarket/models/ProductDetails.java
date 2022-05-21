@@ -14,6 +14,16 @@ public class ProductDetails {
 
     private String manufacturer;
 
+    private String country;
+
+    private double weight;
+
+    private String typeOfPackaging;
+
+    private String storageConditions; // պահպանման պայմաններ
+
+    private String composition; //բաղադրություն
+
     private String productDescription;
 
     @OneToOne(mappedBy = "productDetails")

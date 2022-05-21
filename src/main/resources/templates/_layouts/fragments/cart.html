@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+</head>
+<body>
+<th:block th:fragment="cart">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <h3 class="mb-4" th:utext="#{title.cart.cart}">Cart</h3>
+
+                <table class="table cart__table">
+<!--                    <thead>-->
+<!--                    <tr>-->
+<!--                        <th scope="col">Picture</th>-->
+<!--                        <th scope="col">Product name</th>-->
+<!--                        <th scope="col">Delivery</th>-->
+<!--                        <th scope="col">Quantity</th>-->
+<!--                        <th scope="col">Total</th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+                    <tbody>
+                    <tr class="cart__table_row">
+                        <td class="cart__table_img"><img th:src="@{/img/product/elak.webp}" alt="" ></td>
+                        <td><h6>Strawberries 1 kg</h6></td>
+                        <td>
+                            <h6 class="text-muted">Nearest delivery:</h6>
+                            <h6>Tomorrow</h6>
+                        </td>
+                        <td>
+                            <div>
+                                <form method="post" >
+                                    <div class="cart__spinner form-group" >
+                                        <label for="quantity"></label>
+                                        <input  value="0" min="0" max="1000" type="number" class="form-control-sm" id="quantity"
+                                                autocomplete="off" />
+                                    </div>
+                                </form>
+                            </div>
+                        </td>
+                        <td>1500</td>
+                    </tr>
+                    <tr class="cart__table_row">
+                        <td class="cart__table_img"><img th:src="@{/img/product/apelsin.webp}" alt="" ></td>
+                        <td>Tandz</td>
+                        <td>Vaxy</td>
+                        <td>5</td>
+                        <td>1500</td>
+                    </tr>
+                    <tr class="cart__table_row">
+                        <td class="cart__table_img"><img  th:src="@{/img/product/avocado.webp}" alt="" ></td>
+                        <td>Tandz</td>
+                        <td>Vaxy</td>
+                        <td>5</td>
+                        <td>1500</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4">
+                <h4 class="mb-4" th:utext="#{title.cart.clear}">Clear shopping cart</h4>
+
+                <div class="card  ">
+                    <ul class="list-group list-group-flush cart__checkout ">
+                        <li class="list-group-item ">
+                            <div>
+                                <form>
+                                    <div class="form-row">
+                                        <div class="col h6" th:utext="#{title.cart.isPromo}">
+                                            There is promo code?
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="Promo code">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="cart__checkout_price_weight">
+                                <p class="h6">Order price:</p>
+                                <p class="h6">25000 amd</p>
+                            </div>
+                            <div class="cart__checkout_price_weight">
+                                <p class="h6">Order weight:</p>
+                                <p class="h6">15 kg</p>
+                            </div>
+
+                        </li>
+                        <li class="list-group-item">
+                            <div class="cart__checkout_price_weight">
+                                <p class="h4">Total payable:</p>
+                                <p class="h4">50 000 amd</p>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="cart__checkout_btn">
+                                <button type="submit" class="btn"><span>Checkout</span>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</th:block>
+</body>
+</html>

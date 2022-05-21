@@ -1,5 +1,6 @@
 package com.shopmarket.models.catalog;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.shopmarket.models.Product;
 import lombok.*;
 
@@ -27,6 +28,7 @@ public class Type {
     @ManyToOne(fetch = FetchType.EAGER)
     private SubType subType;
 
+//    @JsonManagedReference
     @OneToMany(mappedBy = "type", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
 
