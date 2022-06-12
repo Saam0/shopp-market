@@ -46,41 +46,54 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart addItemToCart(Cart cart, Long productId, double quantity) {
-        CartItem cartItem = new CartItem();
-
-        Product product = productService.findById(productId)
-                .orElseThrow(() -> new NullPointerException("No products found with id: " + productId));
-
-        if (isThereProductOnCart(product, cart)) {
-            cart.getCartItems().stream()
-                    .filter(p -> p.getProduct().equals(product))
-                    .forEach(p -> p.setQuantity( quantity));
-//                    .forEach(p -> p.setQuantity(p.getQuantity() + quantity));
+    public Cart addItemToCart(Cart cart, Long itemId, Long productId, double quantity) {
+        CartItem cartItem = null;
+        if (itemId!=null) {
+            cartItem = findItemById(itemId);
         } else {
+            cartItem = new CartItem();
+        }
+
+        if (cartItem.getProduct()!= null){
+            cartItem.setQuantity(quantity);
+        }else {
+            Product product = productService.findById(productId)
+                    .orElseThrow(() -> new NullPointerException("No products found with id: " + productId));
             cartItem.setProduct(product);
             cartItem.setQuantity(quantity);
             cartItem.setCart(cart);
-//            cart.addCartItem(cartItem);
         }
+//        if (isThereProductOnCart(product, cart)) {
+//            cart.getCartItems().stream()
+//                    .filter(p -> p.getProduct().equals(product))
+//                    .forEach(p -> p.setQuantity(quantity));
+////                    .forEach(p -> p.setQuantity(p.getQuantity() + quantity));
+//        } else {
+//
+//            cartItem.setProduct(product);
+//            cartItem.setQuantity(quantity);
+//            cartItem.setCart(cart);
+////            cart.addCartItem(cartItem);
+//
+//        }
         return cartRepository.save(cart);
     }
 
     @Override
-    public Cart removeItemById(Cart cart, Long itemId){
+    public Cart removeItemById(Cart cart, Long itemId) {
         cart.getCartItems().remove(findItemById(itemId));
         return cartRepository.save(cart);
     }
 
     @Override
-    public Cart clearCart(Cart cart){
+    public Cart clearCart(Cart cart) {
         cart.getCartItems().clear();
         return cartRepository.save(cart);
     }
 
     @Override
-    public CartItem findItemById(Long itemId){
-        return cartItemRepository.findById(itemId).orElseThrow(() -> new NullPointerException("No item found with id: " + itemId));
+    public CartItem findItemById(Long itemId) {
+        return cartItemRepository.findById(itemId).get();
     }
 
     private boolean isThereProductOnCart(Product product, Cart cart) {

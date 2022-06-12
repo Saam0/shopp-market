@@ -19,9 +19,10 @@
     <div th:replace="_layouts/fragments/header :: header"> This header content is going to be replaced.</div>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div layout:fragment="content">
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="row">
 
             <div>
                 <h5 th:if="${message}!=null" ? class="alert alert-danger" th:utext="${message}"> success </h5>
@@ -56,20 +57,22 @@
                     </div>
                 </div>
 
-                <!--                    phones-->
-                <div class="form-group">
-                    <label class="control-label" for="phone" th:utext="#{label.user.phoneNumber}">Phone
-                        number:</label>
-                    <input type="text" class="form-control" id="phone" th:errorclass="is-invalid"
-                           th:field="*{phoneNumber} "
-                           placeholder="055-203-060">
-                    <span class="invalid-feedback" th:each="error: ${#fields.errors('phoneNumber')}"
-                          th:text="${error}">Validation error</span>
-                </div>
+
 
 
                 <!--                    Address-->
                 <th:block th:each="address, stat:${userForm.addresses}">
+
+                    <!--                    phones-->
+                    <div class="form-group">
+                        <label class="control-label" for="phone" th:utext="#{label.user.phoneNumber}">Phone
+                            number:</label>
+                        <input type="text" class="form-control" id="phone"
+                               th:field="*{addresses[__${stat.index}__].phoneNumber}"
+                               placeholder="055-203-060">
+<!--                        <span class="invalid-feedback" th:each="error: ${#fields.errors('phoneNumber')}"-->
+<!--                              th:text="${error}">Validation error</span>-->
+                    </div>
 
                     <!--                                addressLine-->
                     <div class="form-group">

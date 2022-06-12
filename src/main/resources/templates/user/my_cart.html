@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html"
+      xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{_layouts/layout}">
 <head>
     <meta charset="UTF-8">
@@ -34,7 +36,9 @@
                             <div>
                                 <form id="myForm" method="post" th:action="@{/cart}">
                                     <div class="cart__spinner form-group">
-                                        <input type="hidden" class="form-control" id="productId" th:value="${item.id}"
+                                        <input type="hidden" class="form-control" id="id" th:value="${item.id}"
+                                               name="id">
+                                        <input type="hidden" class="form-control" id="productId" th:value="${item.product.getId()}"
                                                name="productId">
                                         <label for="quantity"></label>
                                         <input value="0" th:value="${item.quantity}" min="0" max="1000" type="number"
@@ -57,7 +61,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-4" checkout__block>
+            <div class="col-4 checkout__block" >
                 <h6 class="mb-2 clear__cart" >
                     <a class="text-muted mr-5" th:href="@{/index}"><i class="fa-solid fa-house"></i></i>
                         <span  th:utext="#{title.cart.goHomePage}">Home</span></a>
@@ -103,8 +107,12 @@
 
                         <li class="list-group-item">
                             <div class="cart__checkout_btn">
-                                <button type="submit" class="btn"><span>Checkout</span>
-                                </button>
+                                <form method="get" th:action="@{/cart/checkout}" >
+
+                                    <button type="submit" class="btn"><span>Checkout</span>
+                                    </button>
+                                </form>
+
                             </div>
                         </li>
                     </ul>

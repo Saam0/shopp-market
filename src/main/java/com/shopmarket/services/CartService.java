@@ -10,7 +10,7 @@ public interface CartService {
 
     Cart getOrCreateCart(String userEmail);
 
-    Cart addItemToCart(Cart cart, Long productId, double quantity);
+    Cart addItemToCart(Cart cart,Long itemId, Long productId, double quantity);
 
     Cart removeItemById(Cart cart, Long itemId);
 

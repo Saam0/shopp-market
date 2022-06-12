@@ -1,13 +1,12 @@
 package com.shopmarket.models;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.shopmarket.validation.PasswordMatches;
 import com.shopmarket.validation.ValidEmail;
 import com.shopmarket.validation.ValidPassword;
 import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -15,15 +14,19 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 
 @PasswordMatches
+//@Getter
+//@Setter
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-//@Data
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "t_user")
 public class User {
@@ -53,8 +56,8 @@ public class User {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dateCreated;
 
-    @NotBlank(message = "{message.validation.noteBlank}")
-    private String phoneNumber;
+//    @NotBlank(message = "{message.validation.noteBlank}")
+//    private String phoneNumber;
 
     @ValidPassword
     private String password;
@@ -64,6 +67,7 @@ public class User {
 
     @Valid
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
     private List<Address> addresses;
 
     @JsonManagedReference
@@ -87,5 +91,16 @@ public class User {
         this.enabled = true;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
+    }
 
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

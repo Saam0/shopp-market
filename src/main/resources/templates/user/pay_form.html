@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <!--    <script src="../static/js/bootstrap-input-spinner.js"></script>-->
+</head>
+<body>
+
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <h3 class="mb-4" th:utext="#{title.cart.cart}">Cart</h3>
+
+                <table class="table  cart__table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col" th:utext="#{label.product.name}">product.name</th>
+                        <th scope="col" th:utext="#{label.product.quantity}">quantity</th>
+                        <th scope="col" th:utext="#{label.product.price}">price</th>
+                        <th scope="col" th:utext="#{label.product.price.sum}">price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item,stat:${session.cart.cartItems}">
+                        <!--                        <td class="cart__table_img"><img th:src="@{'/' + ${item.product.picture.smPictureName}}" alt="">-->
+                        <!--                        </td>-->
+                        <th scope="row" th:utext="${stat.index+1}"></th>
+                        <td><h6>
+                            <a th:href="@{'/cart/item/'+ ${item.id}}"><span
+                                    th:utext="${item.product.productName}"></span></a>
+                        </h6>
+                        </td>
+                        <td>
+                            <h6 class="text-muted" th:utext="${item.quantity}">quantity:</h6>
+                        </td>
+                        <td>
+                            <h6 class="text-muted" th:utext="${item.product.stock.purchasePrice}">unit price</h6>
+                        </td>
+                        <!--                        <td>-->
+                        <!--                            <h6 class="text-muted" th:utext="${item.product.stock.purchasePrice}*${item.quantity}">items sum price</h6>-->
+                        <!--                        </td>-->
+
+                        <td id="items__sum" th:utext="${item.quantity * item.product.stock.purchasePrice}">1500</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <h6 th:utext="#{label.product.subtotalPrice}">subtotal Price</h6>
+                        </td>
+                        <td>
+                            <h6 class="text-muted" th:utext="${session.cart.totalPrice}">total price</h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <h6 th:utext="#{label.product.deliveryPrice}">delivery Price</h6>
+                        </td>
+                        <td>
+                            <h6 class="text-muted">0</h6>
+                        </td>
+                    </tr>
+                    <tr class="table-secondary">
+                        <td colspan="4">
+                            <h6 th:utext="#{label.product.totalPrice}">Total price</h6>
+                        </td>
+                        <td>
+                            <h6 class="" th:utext="${session.cart.totalPrice}">total price</h6>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-4">
+                <h3 class="mb-4" th:utext="#{title.cart.cart}">Cart</h3>
+
+                <table class="table  cart__table">
+                    <!--                    <thead>-->
+                    <!--                    <tr>-->
+                    <!--                        <th scope="col">#</th>-->
+                    <!--                        <th scope="col" th:utext="#{checkout.address.phoneNumber}">phoneNumber</th>-->
+                    <!--                        <th scope="col" th:utext="#{label.product.quantity}">quantity</th>-->
+                    <!--                        <th scope="col" th:utext="#{label.product.price}">price</th>-->
+                    <!--                        <th scope="col" th:utext="#{label.product.price.sum}">price</th>-->
+                    <!--                    </tr>-->
+                    <!--                    </thead>-->
+                    <tbody>
+                    <tr>
+                        <td>
+                            <h6 class="text-muted" th:utext="#{checkout.address.phoneNumber}">phone Number:</h6>
+                        </td>
+                        <td>
+                            <h6 class="text-muted" th:utext="${address.getPhoneNumber()}">unit price</h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h6 class="text-muted" th:utext="#{checkout.address.addressLine}">address Line</h6>
+                        </td>
+                        <td>
+                            <h6 class="text-muted" th:utext="${address.getAddressLine()}">addressLine</h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h6 class="text-muted" th:utext="#{checkout.address.city}">city</h6>
+                        </td>
+                        <td>
+                            <h6 class="text-muted" th:utext="${address.city}">city</h6>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-8 checkout__block">
+                <!--                <h6 class="mb-2 clear__cart" >-->
+                <!--                    <a class="text-muted mr-5" th:href="@{/index}"><i class="fa-solid fa-house"></i></i>-->
+                <!--                        <span  th:utext="#{title.cart.goHomePage}">Home</span></a>-->
+                <!--                </h6>-->
+                <!--                <h6 class="mb-2  clear__cart" >-->
+                <!--                    <a class="text-muted ml-5" th:href="@{/cart/clear-cart}"><i class="fa-solid fa-trash-can"></i>-->
+                <!--                        <span  th:utext="#{title.cart.clear}">Clear shopping cart</span></a>-->
+                <!--                </h6>-->
+
+                <div class="card  ">
+
+                    <form method="post" th:action="@{/cart/payout}">
+                        <ul class="list-group list-group-flush cart__payout ">
+                            <li class="list-group-item ">
+                                <div class="form-row">
+                                    <div class="col h6" th:utext="#{checkout.pay.BankCardNumber}">
+                                        Bankcard number
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="bankCardNumber"
+                                               placeholder="0000 0000 0000 0000">
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="cart__payout_btn">
+                                    <button type="submit" class="btn"><span>Payout</span>
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+<div layout:fragment="scripts">
+
+</div>
+</body>
+</html>

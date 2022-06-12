@@ -3,9 +3,7 @@ package com.shopmarket.models;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static javax.persistence.TemporalType.TIMESTAMP;
 
@@ -22,7 +20,7 @@ public class Order {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
             targetEntity = OrderProduct.class, mappedBy = "order")
-    private Set<OrderProduct> orderProducts;
+    private Set<OrderProduct> orderProducts = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -41,4 +39,17 @@ public class Order {
     private boolean deliveryIncluded;
 
     private boolean executed;
+
+
+    public void addOrderProduct(OrderProduct orderProduct){
+        addOrderProduct(orderProduct,false);
+    }
+
+    public void addOrderProduct(OrderProduct orderProduct,boolean otherSideHasBeenSet){
+        getOrderProducts().add(orderProduct);
+        if (otherSideHasBeenSet){
+            return;
+        }
+        orderProduct.setOrder(this, true);
+    }
 }

@@ -20,7 +20,7 @@ public class CartItem {
     private Cart cart;
 
 
-    @MapsId
+//    @MapsId
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Product product;

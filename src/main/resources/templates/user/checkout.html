@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="row delivery__radio">
+
+            <form class="form" action="#" th:action="@{/cart/pay-process}" method="post"
+                  th:object="${address}">
+                <div class="middle">
+                    <h1>Shipping Methods</h1>
+                    <label>
+                        <input type="radio" name="radio" checked/>
+                        <div class="front-end box">
+                            <span>Express delivery</span>
+                        </div>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="radio"/>
+                        <div class="back-end box">
+                            <span>Self-delivery</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form">
+
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" value="Disable" name="addrRadio" checked>Use an
+                            existing address
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" value="Enable" name="addrRadio">Use the new
+                            address
+                        </label>
+                    </div>
+
+                    <div class="addresses_block">
+                        <!--                    phones-->
+                        <div class="form-group">
+                            <label class="control-label" for="phone" th:utext="#{label.user.phoneNumber}">Phone
+                                number:</label>
+                            <input type="text" class="form-control" id="phone"
+                                   th:field="*{phoneNumber}"
+                                   th:value="${address.getPhoneNumber()}"
+                                   placeholder="055-203-060">
+                        </div>
+
+
+                        <!--                                addressLine-->
+                        <div class="form-group">
+                            <label class="control-label " for="address"
+                                   th:utext="#{label.user.addressLine}">Address line:</label>
+                            <input type="text" class="form-control" id="address"
+                                   th:field="*{addressLine}"
+                                   th:value="${address.getAddressLine()}"
+                                   placeholder="18/1 Araratyan Street">
+                        </div>
+
+                        <!--                                City-->
+                        <div class="form-row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="city"
+                                           th:utext="#{label.user.city}">City:</label>
+                                    <input type="text" class="form-control " id="city"
+                                           th:field="*{city}"
+                                           th:value="${address.getCity()}"
+                                           placeholder="Artashat">
+                                </div>
+                            </div>
+
+                            <!--                            Country-->
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="country"
+                                           th:utext="#{label.user.country}">Country:</label>
+                                    <input type="text" class="form-control " id="country"
+                                           th:field="*{country}"
+                                           th:value="${address.getCountry()}"
+                                           placeholder="Armenia">
+                                </div>
+                            </div>
+
+                            <!--                                postal code-->
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label col-xs-3" for="postalCode"
+                                           th:utext="#{label.user.postalCode}">Postal code:</label>
+                                    <input type="text" class="form-control " id="postalCode"
+                                           th:field="*{postalCode}"
+                                           th:value="${address.getPostalCode()}"
+                                           placeholder="1101">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <a class=" mr-5 btn btn-secondary" th:href="@{/index}"><i class="fa-solid fa-house"></i></i>
+                    <span th:utext="#{title.cart.goHomePage}">Home</span></a>
+
+                <button type="submit" class="btn btn-primary">proceed to pay</button>
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+<div layout:fragment="scripts">
+    <script>
+        $(document).ready(function () {
+            // By Default Disable radio button
+            $(".addresses_block input").attr('disabled', true);
+            $(".addresses_block ").css('opacity', '.4'); // This line is used to lightly hide label for disable radio buttons.
+            // Disable radio buttons function on Check Disable radio button.
+            $("form input[name=addrRadio]").change(function () {
+                if ($(this).val() == "Disable") {
+                    $(".addresses_block input").attr('checked', false);
+                    $(".addresses_block input").attr('disabled', true);
+                    $(".addresses_block ").css('opacity', '.4');
+                }
+                // Else Enable radio buttons.
+                else {
+                    $(".addresses_block input").attr('disabled', false);
+                    $(".addresses_block ").css('opacity', '1');
+                }
+            });
+        });
+    </script>
+
+
+</div>
+</body>
+</html>

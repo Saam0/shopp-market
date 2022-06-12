@@ -43,13 +43,17 @@ public class UserServiceImpl implements UserService {
         newUser.setGender(user.getGender());
         newUser.setBirthDate(user.getBirthDate());
         newUser.setEnabled(user.isEnabled());
-        newUser.setPhoneNumber(user.getPhoneNumber());
+//        newUser.setPhoneNumber(user.getPhoneNumber());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setRoles(roleRepository.findByName(Roles.USER.toString()));
 
         System.out.println("service = " + newUser.getPassword() + "; " + newUser.getRoles().toString());
         System.out.println("service = " + newUser.getPasswordConfirm() + "; " + newUser.getRoles().toString());
         return userRepository.save(newUser);
+    }
+    @Override
+    public User update(User user) {
+        return userRepository.save(user);
     }
 
     @Override

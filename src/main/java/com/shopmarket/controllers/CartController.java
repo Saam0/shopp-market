@@ -39,8 +39,8 @@ public class CartController {
         String substringURL = url.substring(6);
 
 //         If there is no cart, create a new cart;
-        cart = cartService.getOrCreateCart("Samvelyazhyan@gmail.com");
-        cartService.addItemToCart(cart, id, quantity);
+        cart = cartService.getOrCreateCart(principal.getName());
+        cartService.addItemToCart(cart,null, id, quantity);
         model.addAttribute("cart", cart);
         return "redirect:/" + substringURL;
     }
@@ -101,7 +101,7 @@ public class CartController {
     ) {
         String userEmail =  principal.getName();
         Cart cart = cartService.getOrCreateCart(userEmail);
-        cartService.addItemToCart(cart,carItemDTO.getProductId(),carItemDTO.getQuantity());
+        cartService.addItemToCart(cart,carItemDTO.getId(),carItemDTO.getProductId(),carItemDTO.getQuantity());
 
         request.getSession().setAttribute("cart",cartService.getOrCreateCart(userEmail));
         return cart;
