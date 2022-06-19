@@ -52,4 +52,12 @@ public class Order {
         }
         orderProduct.setOrder(this, true);
     }
+
+    public double getProductsCost() {
+        double sum = 0.0;
+        for (OrderProduct orderProduct : this.orderProducts) {
+            sum += orderProduct.getProduct().getStock().getPurchasePrice() * orderProduct.getQuantity();
+        }
+        return sum;
+    }
 }

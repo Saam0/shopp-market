@@ -69,7 +69,7 @@ public class CheckoutController {
 
         if (isTrueBankCardNumber(bankCardNumber)){
             String userEmail = principal.getName();
-            orderService.saveOrder(userEmail);
+            orderService.saveOrder(userEmail, bankCardNumber);
 
             // TODO: 12.06.2022 avelacnel: ordery stanaluc heto maqrel Cart@
             return "user/payout";
