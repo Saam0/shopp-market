@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -22,41 +23,44 @@ import static java.util.stream.Collectors.toList;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
-    @Autowired
-    private OrderProductRepository orderProductRepository;
+
     @Autowired
     private BillRepository billRepository;
     @Autowired
     private UserService userService;
-    @Autowired
-    private CartService cartService;
 
     @Transactional
     @Override
-    public Order saveOrder(String userEmail) {
+    public Order saveOrder(String userEmail, String ccNumber) {
         User user = userService.findUserByEmail(userEmail).get();
         Cart cart = user.getCart();
         Order order = new Order();
         order.setUser(user);
-        Set<OrderProduct> orderProducts = cart.getCartItems().stream().map(item -> {
+        order.setOrderProducts(fillCartItemsToOrderProducts(cart,order));
+        Date date = new Date();
+        order.setDateCreated(date);
+        order.setProductsCost(order.getProductsCost());
+        order.setBill(saveBill(order, date, ccNumber));
+        return orderRepository.save(order);
+    }
+
+    private Bill saveBill(Order order, Date date, String ccNumber){
+        Bill bill = new Bill();
+        bill.setOrder(order);
+        bill.setDateCreated(date);
+        bill.setCcNumber(ccNumber);
+        bill.setPayed(true);
+        bill.setTotalCost(order.getProductsCost()+order.getDeliveryCost());
+        return billRepository.save(bill);
+    }
+
+    private Set<OrderProduct> fillCartItemsToOrderProducts(Cart cart, Order order){
+        return cart.getCartItems().stream().map(item -> {
             OrderProduct orderProduct = new OrderProduct();
             orderProduct.setProduct(item.getProduct());
             orderProduct.setQuantity(item.getQuantity());
             order.addOrderProduct(orderProduct);
             return orderProduct;
         }).collect(Collectors.toSet());
-
-        // TODO: 12.06.2022 avelacnel Orderi pnacac toxery
-
-        return orderRepository.save(order);
     }
-
-    // TODO: 12.06.2022 kapel Bill@ ordery het
-//    public Order createOrder() {
-//
-//    }
-//
-//    public void createOrderedProduct(){
-//
-//    }
 }
