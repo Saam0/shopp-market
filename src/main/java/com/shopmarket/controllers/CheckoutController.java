@@ -1,7 +1,6 @@
 package com.shopmarket.controllers;
 
 import com.shopmarket.models.Address;
-import com.shopmarket.models.Cart;
 import com.shopmarket.models.User;
 import com.shopmarket.services.*;
 import org.slf4j.Logger;
@@ -70,11 +69,9 @@ public class CheckoutController {
 
         if (isTrueBankCardNumber(bankCardNumber)){
             String userEmail = principal.getName();
-            orderService.saveOrder(userEmail, bankCardNumber);
-            cartService.clearCart(cartService.getOrCreateCart(userEmail));
-            // TODO: 19.06.2022 stanal ordery verji
+            orderService.saveOrder(userEmail);
 
-
+            // TODO: 12.06.2022 avelacnel: ordery stanaluc heto maqrel Cart@
             return "user/payout";
         }
         return "user/bad-payout";
