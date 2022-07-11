@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Menu</title>
@@ -81,11 +82,18 @@
                         <i class="fa-regular fa-heart  "></i>
                     </div>
                     <div class="cart__icon ml-4">
+                        <th:block sec:authorize="!isAuthenticated()">
+                            <a class="text-muted nav-link"  href="" data-toggle="modal" data-target="#loginModal"><i class="fas fa-shopping-cart "></i></a>
+                            <div   th:replace="_layouts/fragments/login :: login('loginModal')"></div>
+                        </th:block>
+                        <th:block sec:authorize="isAuthenticated()">
+
                         <a href="#" th:href="@{/cart/my-cart/}"><i class="fas fa-shopping-cart "></i></a>
                         <span id="cart-total-items" >
                             <span class="badge badge-warning badge-pill" th:if="${session.cart}!=null"
                                   th:utext="${session.cart.itemsNumber}"> </span>
                         </span>
+                        </th:block>
                     </div>
                 </div>
             </nav>

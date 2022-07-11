@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{_layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <script src="../static/js/bootstrap-input-spinner.js"></script>
+</head>
+<body>
+<div layout:fragment="header">
+
+<!--    <div th:replace="_layouts/fragments/header :: header"> This header content is going to be replaced.</div>-->
+
+    <div th:replace="_layouts/fragments/admin-menu :: admin-menu"> Admin menu</div>
+    <!--    <div th:replace="_layouts/fragments/carusel :: carusel"> This header content is going to be replaced.</div>-->
+
+</div>
+
+
+
+<div layout:fragment="content">
+    <div th:replace="_layouts/fragments/carusel :: carusel"> This header content is going to be replaced.</div>
+
+    <div sec:authorize="hasRole('ROLE_USER')">
+        Content for users
+    </div>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        Content for admin
+    </div>
+</div>
+
+<div layout:fragment="scripts">
+
+
+</div>
+</body>
+</html>

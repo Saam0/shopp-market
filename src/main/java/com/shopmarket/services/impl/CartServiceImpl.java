@@ -12,12 +12,9 @@ import com.shopmarket.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Transactional
 @Service
@@ -47,18 +44,22 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart addItemToCart(Cart cart, Long itemId, Long productId, double quantity) {
+        Product product = productService.findById(productId)
+                .orElseThrow(() -> new NullPointerException("No products found with id: " + productId));
         CartItem cartItem = null;
-        if (itemId!=null) {
-            cartItem = findItemById(itemId);
+        if (isThereProductOnCart(product, cart)) {
+             cartItem = cart.getCartItems().stream()
+                    .filter(p -> p.getProduct().equals(product))
+                    .findFirst().get();
         } else {
             cartItem = new CartItem();
         }
 
-        if (cartItem.getProduct()!= null){
+        if (cartItem.getProduct() != null) {
             cartItem.setQuantity(quantity);
-        }else {
-            Product product = productService.findById(productId)
-                    .orElseThrow(() -> new NullPointerException("No products found with id: " + productId));
+        } else {
+//            Product product = productService.findById(productId)
+//                    .orElseThrow(() -> new NullPointerException("No products found with id: " + productId));
             cartItem.setProduct(product);
             cartItem.setQuantity(quantity);
             cartItem.setCart(cart);

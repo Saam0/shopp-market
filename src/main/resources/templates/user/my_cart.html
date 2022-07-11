@@ -11,7 +11,6 @@
 </head>
 <body>
 
-
 <div layout:fragment="content">
     <div class="container">
         <div class="row">
@@ -21,7 +20,8 @@
                 <table class="table cart__table">
                     <tbody>
                     <tr th:each="item:${myCart.cartItems}" class="cart__table_row">
-                        <td class="cart__table_img"><img th:src="@{'/' + ${item.product.picture.smPictureName}}" alt="">
+                        <td class="cart__table_img"><img th:src="@{'/' + ${item.product.picture.smPictureName}}"
+                                                         alt="">
                         </td>
                         <td><h6>
                             <a th:href="@{'/cart/item/'+ ${item.id}}"><span
@@ -38,10 +38,12 @@
                                     <div class="cart__spinner form-group">
                                         <input type="hidden" class="form-control" id="id" th:value="${item.id}"
                                                name="id">
-                                        <input type="hidden" class="form-control" id="productId" th:value="${item.product.getId()}"
+                                        <input type="hidden" class="form-control" id="productId"
+                                               th:value="${item.product.getId()}"
                                                name="productId">
                                         <label for="quantity"></label>
-                                        <input value="0" th:value="${item.quantity}" min="0" max="1000" type="number"
+                                        <input value="0" th:value="${item.quantity}" min="0" max="1000"
+                                               type="number"
                                                name=quantity class="form-control-sm" id="quantity"
                                                autocomplete="off"/>
                                         <input type="hidden" class="form-control" id="itemPrice"
@@ -61,14 +63,14 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-4 checkout__block" >
-                <h6 class="mb-2 clear__cart" >
+            <div class="col-4 checkout__block">
+                <h6 class="mb-2 clear__cart">
                     <a class="text-muted mr-5" th:href="@{/index}"><i class="fa-solid fa-house"></i></i>
-                        <span  th:utext="#{title.cart.goHomePage}">Home</span></a>
+                        <span th:utext="#{title.cart.goHomePage}">Home</span></a>
                 </h6>
-                <h6 class="mb-2  clear__cart" >
+                <h6 class="mb-2  clear__cart">
                     <a class="text-muted ml-5" th:href="@{/cart/clear-cart}"><i class="fa-solid fa-trash-can"></i>
-                    <span  th:utext="#{title.cart.clear}">Clear shopping cart</span></a>
+                        <span th:utext="#{title.cart.clear}">Clear shopping cart</span></a>
                 </h6>
 
                 <div class="card  ">
@@ -107,7 +109,7 @@
 
                         <li class="list-group-item">
                             <div class="cart__checkout_btn">
-                                <form method="get" th:action="@{/cart/checkout}" >
+                                <form method="get" th:action="@{/cart/checkout}">
 
                                     <button type="submit" class="btn"><span>Checkout</span>
                                     </button>
@@ -121,7 +123,6 @@
 
         </div>
     </div>
-
 </div>
 
 <div layout:fragment="scripts">
@@ -139,7 +140,6 @@
     </script>
 
     <script>
-
         $('button.btn-minus, button.btn-plus ').click(function () {
             var $this = $(this);
             var form = $this.parents('form:first');
@@ -191,8 +191,6 @@
             });
             return o;
         };
-
-
     </script>
 
 </div>

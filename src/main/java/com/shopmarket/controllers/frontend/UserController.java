@@ -1,4 +1,4 @@
-package com.shopmarket.controllers;
+package com.shopmarket.controllers.frontend;
 
 import com.shopmarket.exceptions.UserAlreadyExistException;
 import com.shopmarket.models.Address;

@@ -1,10 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layouts/layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>index</title>
+    <!--    <script src="../static/js/bootstrap-input-spinner.js"></script>-->
 </head>
 <body>
-<h1>Good</h1>
+
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <h3 th:utext="#{payout.order.confirmed}">Оrder confirmed</h3>
+
+                <h5 th:utext="#{payout.order.packed}">Your order will be packed and delivered within 24 hours. </h5>
+
+                <h6><span th:utext="#{payout.order.accountNumber}"></span>
+                    <span th:utext="${billNumber}">0000</span></h6>
+
+                <h5 th:utext="#{payout.order.thankYou}">Thank you for ordering in our store!</h5>
+            </div>
+
+<!--            <div class="col-4">-->
+<!--                <h3 class="mb-4" th:utext="#{title.cart.cart}">Cart</h3>-->
+
+<!--                <table class="table  cart__table">-->
+
+<!--                    <tbody>-->
+<!--                    <tr>-->
+<!--                        <td>-->
+<!--                            <h6 class="text-muted" th:utext="#{checkout.address.phoneNumber}">phone Number:</h6>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <h6 class="text-muted" th:utext="${address.getPhoneNumber()}">unit price</h6>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>-->
+<!--                            <h6 class="text-muted" th:utext="#{checkout.address.addressLine}">address Line</h6>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <h6 class="text-muted" th:utext="${address.getAddressLine()}">addressLine</h6>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>-->
+<!--                            <h6 class="text-muted" th:utext="#{checkout.address.city}">city</h6>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <h6 class="text-muted" th:utext="${address.city}">city</h6>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+
+
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--            </div>-->
+<!--        </div>-->
+
+    </div>
+
+</div>
+</div>
+<div layout:fragment="scripts">
+
+</div>
 </body>
 </html>

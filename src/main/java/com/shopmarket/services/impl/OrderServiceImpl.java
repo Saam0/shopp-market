@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -50,6 +51,7 @@ public class OrderServiceImpl implements OrderService {
         bill.setDateCreated(date);
         bill.setCcNumber(ccNumber);
         bill.setPayed(true);
+        bill.setNumber(new Random().nextInt(999999999));
         bill.setTotalCost(order.getProductsCost()+order.getDeliveryCost());
         return billRepository.save(bill);
     }

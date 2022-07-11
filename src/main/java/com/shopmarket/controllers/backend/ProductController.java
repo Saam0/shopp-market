@@ -1,4 +1,4 @@
-package com.shopmarket.controllers;
+package com.shopmarket.controllers.backend;
 
 import com.shopmarket.models.*;
 import com.shopmarket.models.catalog.GlobalType;
@@ -19,7 +19,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/product")
-public class AdminController {
+public class ProductController {
     @Autowired
     private ProductService productService;
     @Autowired
@@ -28,7 +28,6 @@ public class AdminController {
     private SupplierService supplierService;
     @Autowired
     private StockService stockService;
-
     @Autowired
     private Logger logger;
 

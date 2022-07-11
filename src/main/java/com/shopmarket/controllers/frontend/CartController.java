@@ -1,4 +1,4 @@
-package com.shopmarket.controllers;
+package com.shopmarket.controllers.frontend;
 
 import com.shopmarket.models.*;
 import com.shopmarket.models.DTO.CarItemDTO;
@@ -101,6 +101,10 @@ public class CartController {
     ) {
         String userEmail =  principal.getName();
         Cart cart = cartService.getOrCreateCart(userEmail);
+        logger.info("cartItemId : " + carItemDTO.getId());
+        logger.info("productId : " + carItemDTO.getProductId());
+        logger.info("quantity : " + carItemDTO.getQuantity());
+
         cartService.addItemToCart(cart,carItemDTO.getId(),carItemDTO.getProductId(),carItemDTO.getQuantity());
 
         request.getSession().setAttribute("cart",cartService.getOrCreateCart(userEmail));

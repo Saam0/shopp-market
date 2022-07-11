@@ -1,4 +1,4 @@
-package com.shopmarket.controllers.controllerAdvices;
+package com.shopmarket.controllers.advices;
 
 import com.shopmarket.models.catalog.GlobalType;
 import com.shopmarket.services.CartService;

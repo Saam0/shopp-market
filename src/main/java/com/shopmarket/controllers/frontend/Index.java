@@ -1,4 +1,4 @@
-package com.shopmarket.controllers;
+package com.shopmarket.controllers.frontend;
 
 import com.shopmarket.models.catalog.GlobalType;
 import com.shopmarket.services.CatalogService;

@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-    <title>header</title>
-
+    <title>Admin Menu</title>
 </head>
 <body>
-<th:block th:fragment="header">
+<th:block th:fragment="admin-menu">
 
-    <!-- Header Section Begin -->
     <header class="header">
         <div class="container">
             <nav class="navbar  navbar-expand-lg navbar-light ">
@@ -58,21 +56,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
                     </ul>
 
-                    <div class="call__icon text-muted mr-4">
-                        <div><i class="fas fa-phone-alt"></i>
-                            <span th:utext="#{header.topMenu.phoneNumber}">+374-11-625-625</span>
-                        </div>
-                        <a class="nav-link text-muted" href="#" th:utext="#{header.topMenu.orderCall}">Order a call</a>
-                    </div>
-
-                    <!--                        <div class="call__icon">-->
-                    <!--                            <span><i class="fas fa-phone-alt"> </i></span>-->
-                    <!--                        </div>-->
-                    <!--                        <div class="call__icon-text">-->
-                    <!--                            <span><i class="fas fa-phone-alt"> </i></span>-->
-                    <!--                            <div th:utext="#{header.topMenu.phoneNumber}">+374-11-625-625</div>-->
-                    <!--                        </div>-->
-                    <!--                        <span th:utext="#{header.topMenu.orderCall}">Order a call</span>-->
 
 
                 </div>
@@ -90,23 +73,16 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                     </div>
                 </div>
 
-<!--                <div>-->
-<!--                    <select id="locales">-->
-<!--                        <option value=""></option>-->
-<!--                        <option value="en" th:text="#{lang.eng}"></option>-->
-<!--                        <option value="ru" >ru</option>-->
-<!--                    </select>-->
-<!--                </div>-->
                 <div>
                     <div class=" header__top__right__auth ml-4">
-<!--                        <a class="text-muted nav-link" href="#"><i class="fa fa-user"></i>Login</a>-->
+                        <!--                        <a class="text-muted nav-link" href="#"><i class="fa fa-user"></i>Login</a>-->
                         <div class="header__top__right__auth">
                             <th:block sec:authorize="!isAuthenticated()">
                                 <a class="text-muted nav-link"  href="" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user" ></i> <span th:utext="#{modal.user.login}"></span></a>
                                 <div   th:replace="_layouts/fragments/login :: login('loginModal')"></div>
                             </th:block>
                             <th:block sec:authorize="isAuthenticated()">
-<!--                                <a class="text-muted nav-link"  th:href="@{/logout}"  ><i class="fa fa-sign-out" ></i> <span th:utext="#{modal.user.logOut}"></span></a>-->
+                                <!--                                <a class="text-muted nav-link"  th:href="@{/logout}"  ><i class="fa fa-sign-out" ></i> <span th:utext="#{modal.user.logOut}"></span></a>-->
                                 <div class="dropdown">
                                     <a class="text-muted nav-link  dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-sign-out" ></i> <span th:utext="#{modal.user.logOut}"></span>
@@ -129,8 +105,5 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     </header>
 
 </th:block>
-
-
-
 </body>
 </html>

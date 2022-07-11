@@ -1,6 +1,8 @@
-package com.shopmarket.controllers;
+package com.shopmarket.controllers.frontend;
 
 import com.shopmarket.models.Address;
+import com.shopmarket.models.Bill;
+import com.shopmarket.models.Order;
 import com.shopmarket.models.User;
 import com.shopmarket.services.*;
 import org.slf4j.Logger;
@@ -26,6 +28,8 @@ public class CheckoutController {
     private AddressService addressService;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private BillService billService;
     @Autowired
     private Logger logger;
 
@@ -69,8 +73,13 @@ public class CheckoutController {
 
         if (isTrueBankCardNumber(bankCardNumber)){
             String userEmail = principal.getName();
-            orderService.saveOrder(userEmail,bankCardNumber);
+            Order order = orderService.saveOrder(userEmail, bankCardNumber);
             cartService.clearCart(cartService.getOrCreateCart(userEmail));
+            Bill bill = billService.getBill(order);
+            logger.info("billNumber: " + bill.getNumber());
+            logger.info("billNumberByOrder: " + order.getBill().getNumber());
+
+            model.addAttribute("billNumber", bill.getNumber());
 
 
             // TODO: 12.06.2022 avelacnel: ordery stanaluc heto maqrel Cart@
