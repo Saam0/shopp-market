@@ -5,34 +5,190 @@
 <head>
     <meta charset="UTF-8">
     <title>index</title>
-    <script src="../static/js/bootstrap-input-spinner.js"></script>
+    <!--    <script src="../static/js/bootstrap-input-spinner.js"></script>-->
 </head>
 <body>
 <div layout:fragment="header">
 
-<!--    <div th:replace="_layouts/fragments/header :: header"> This header content is going to be replaced.</div>-->
+    <!--    <div th:replace="_layouts/fragments/header :: header"> This header content is going to be replaced.</div>-->
 
-    <div th:replace="_layouts/fragments/admin-menu :: admin-menu"> Admin menu</div>
+    <div th:replace="_layouts/fragments/header :: header"> menu</div>
     <!--    <div th:replace="_layouts/fragments/carusel :: carusel"> This header content is going to be replaced.</div>-->
 
 </div>
 
 
-
 <div layout:fragment="content">
-    <div th:replace="_layouts/fragments/carusel :: carusel"> This header content is going to be replaced.</div>
 
-    <div sec:authorize="hasRole('ROLE_USER')">
-        Content for users
+    <div class="container">
+        <div class="row my-3">
+            <div class="col">
+                <div class="card card__admin click">
+                    <div class="card-body">
+                        <div class="card__admin_item ">
+
+                            <div><h5 class="card-title">850</h5>
+                                <p class="card-text">Product sold</p>
+                            </div>
+                            <p style="color:#007bff"><i class="fas fa-shopping-cart"></i></p>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="25"
+                                 aria-valuemin="0" aria-valuemax="100">75%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card__admin click">
+                    <div class="card-body">
+                        <div class="card__admin_item ">
+                            <div><h5 class="card-title">748$</h5>
+                                <p class="card-text">Net Profit</p>
+                            </div>
+                            <p style="color: #ffc107"><i class="fa-solid fa-chart-pie"></i></p>
+
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 75%;"
+                                 aria-valuenow="25"
+                                 aria-valuemin="0" aria-valuemax="100">75%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card__admin click">
+                    <div class="card-body">
+                        <div class="card__admin_item ">
+                            <div><h5 class="card-title">156</h5>
+                                <p class="card-text">New Customer</p>
+                            </div>
+                            <p style="color: #28a745"><i class="fa-sharp fa-solid fa-user-plus"></i></p>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 75%;"
+                                 aria-valuenow="25"
+                                 aria-valuemin="0" aria-valuemax="100">75%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card__admin click">
+                    <div class="card-body">
+                        <div class="card__admin_item ">
+                            <div><h5 class="card-title">98.9%</h5>
+                                <p class="card-text">Customer Satisfaction</p>
+                            </div>
+                            <p style="color: #dc3545"><i class="fa-regular fa-heart"></i></p>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 75%;"
+                                 aria-valuenow="25"
+                                 aria-valuemin="0" aria-valuemax="100">75%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col">
+                <div class="card card__admin click" th:href="@{/admin/products-table/}">
+                    <div class="card-body">
+                        <div class="card__admin_item ">
+                            <div>
+                                <h5 class="card-title" th:utext="${numberOfProducts}">850</h5>
+                                <p class="card-text">Products</p>
+                            </div>
+                            <p style="color:#007bff "><i class="fas fa-shopping-cart "></i></p>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="25"
+                                 aria-valuemin="0" aria-valuemax="100">75%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card__admin click">
+                    <div class="card-body">
+                        <div class="card__admin_item ">
+                            <div><h5 class="card-title">748$</h5>
+                                <p class="card-text">Net Profit</p>
+                            </div>
+                            <p style="color:#ffc107 "><i class="fa-solid fa-chart-pie"></i></p>
+
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 75%;"
+                                 aria-valuenow="25"
+                                 aria-valuemin="0" aria-valuemax="100">75%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card__admin click">
+                    <div class="card-body">
+                        <div class="card__admin_item ">
+                            <div><h5 class="card-title">156</h5>
+                                <p class="card-text">New Customer</p>
+                            </div>
+                            <p style="color: #28a745"><i class="fa-sharp fa-solid fa-user-plus"></i></p>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 75%;"
+                                 aria-valuenow="25"
+                                 aria-valuemin="0" aria-valuemax="100">75%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card__admin click">
+                    <div class="card-body">
+                        <div class="card__admin_item ">
+                            <div><h5 class="card-title">98.9%</h5>
+                                <p class="card-text">Customer Satisfaction</p>
+                            </div>
+                            <p style="color: #dc3545"><i class="fa-regular fa-heart"></i></p>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 75%;"
+                                 aria-valuenow="25"
+                                 aria-valuemin="0" aria-valuemax="100">75%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--        <div class="row">-->
+            <!--            <div class="col-6">-->
+            <!--                <canvas id="myChart" width="800" height="400"></canvas>-->
+
+            <!--            </div>-->
+
+            <!--        </div>-->
+        </div>
+
     </div>
-    <div sec:authorize="hasRole('ROLE_ADMIN')">
-        Content for admin
+
+    <div layout:fragment="scripts">
+        <script th:inline="javascript">
+            var productsSale = [[${productsSale}]]
+        </script>
+        <script th:src="@{/webjars/chart.js/3.9.1/dist/chart.min.js}"></script>
+        <script th:src="@{/js/charts.js}" type="text/javascript"></script>
+
     </div>
-</div>
-
-<div layout:fragment="scripts">
-
-
-</div>
 </body>
 </html>

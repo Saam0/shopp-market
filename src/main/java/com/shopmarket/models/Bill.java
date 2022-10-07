@@ -1,6 +1,9 @@
 package com.shopmarket.models;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -11,7 +14,10 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 /**
  * Bill of the {@link Order}.
  */
-@Data
+@Getter
+@Setter
+//@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "t_bill")
 public class Bill {

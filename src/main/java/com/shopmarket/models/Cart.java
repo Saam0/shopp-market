@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,7 +16,10 @@ import java.util.List;
 /**
  * Cart of the {@link User}
  */
-@Data
+@Getter
+@Setter
+//@ToString
+//@RequiredArgsConstructor
 @Entity
 @Table(name = "t_cart")
 public class Cart {

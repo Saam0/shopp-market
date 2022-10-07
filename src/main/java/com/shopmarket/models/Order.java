@@ -1,6 +1,10 @@
 package com.shopmarket.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.*;
@@ -10,14 +14,17 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 /**
  * Order of the {@link User}.
  */
-@Data
+@Getter
+@Setter
+//@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "t_order")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
             targetEntity = OrderProduct.class, mappedBy = "order")
     private Set<OrderProduct> orderProducts = new HashSet<>();

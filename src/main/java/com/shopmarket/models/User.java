@@ -25,7 +25,7 @@ import java.util.Set;
 //@AllArgsConstructor
 @Getter
 @Setter
-@ToString
+//@ToString
 @RequiredArgsConstructor
 @Entity
 @Table(name = "t_user")

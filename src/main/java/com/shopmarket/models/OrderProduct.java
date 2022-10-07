@@ -1,5 +1,6 @@
 package com.shopmarket.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -17,19 +18,19 @@ public class OrderProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-//    @MapsId
+    //    @MapsId
+    @JsonManagedReference
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @ToString.Exclude
     private Order order;
 
-//    @MapsId
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JsonManagedReference
+//    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @ManyToOne( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Product product;
 
     private double quantity;
-
 
 
     public void setOrder(Order order) {

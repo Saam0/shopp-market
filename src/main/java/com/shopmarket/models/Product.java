@@ -1,5 +1,7 @@
 package com.shopmarket.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.shopmarket.models.catalog.Type;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -11,7 +13,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@ToString
+//@ToString
 @RequiredArgsConstructor
 @Entity
 @Table(name = "t_product")
@@ -26,7 +28,6 @@ public class Product {
     private String productName;
 
     private boolean available;
-
     @OneToOne(cascade = CascadeType.ALL)
 //    @ToString.Exclude
     private ProductDetails productDetails;
@@ -38,9 +39,8 @@ public class Product {
     @OneToOne(mappedBy = "product")
     private Stock stock;
 
-//    @JsonBackReference
     @Valid
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "type_id")
     private Type type;
 

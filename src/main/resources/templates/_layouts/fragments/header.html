@@ -112,6 +112,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                         <i class="fa fa-sign-out" ></i> <span th:utext="#{modal.user.logOut}"></span>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <div sec:authorize="hasRole('ADMIN')">
+                                            <a class="dropdown-item" th:href="@{/admin/admin-panel}" th:utext="#{modal.user.adminPanel}">logout</a>
+                                        </div>
                                         <a class="dropdown-item" th:href="@{/logout}" th:utext="#{modal.user.logOut}">logout</a>
                                         <a class="dropdown-item" href="#" th:utext="#{modal.user.account}">Account</a>
                                         <a class="dropdown-item" href="#" th:utext="#{modal.user.orderHistory}">Order history</a>

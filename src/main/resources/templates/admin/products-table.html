@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <!--    <script src="../static/js/bootstrap-input-spinner.js"></script>-->
+</head>
+<body>
+<div layout:fragment="header">
+
+    <!--    <div th:replace="_layouts/fragments/header :: header"> This header content is going to be replaced.</div>-->
+
+    <div th:replace="_layouts/fragments/header :: header"> menu</div>
+    <!--    <div th:replace="_layouts/fragments/carusel :: carusel"> This header content is going to be replaced.</div>-->
+
+</div>
+
+
+<div layout:fragment="content">
+
+    <div class="container">
+        <div class="row my-4">
+            <div class="col">
+                <a style="display: inline-block" class="btn btn-success"
+                   th:href="@{/product/add}">Add product</a>
+            </div>
+            <div class="col form-inline my-2 my-lg-0" style="justify-content: flex-end">
+                <form th:action="@{/admin/products-table}">
+                    <input class="form-control mr-sm-2" type="search" id="keyword" name="keyword"  placeholder="Search" >
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col"><a th:href="@{'/admin/products-table/page/' + ${currentPage} + '/productName?sortDir='+${reversSortDir}}">Product name</a></th>
+                        <th scope="col"><a th:href="@{'/admin/products-table/page/'+ ${currentPage} +'/type.typeName?sortDir='+${reversSortDir}}">Type name</a></th>
+                        <!--                        <th scope="col">Manufacturer</t+ ${currentPage} +'/h>-->
+                        <th scope="col"><a th:href="@{'/admin/products-table/page/'+ ${currentPage} +'/stock.purchasePrice?sortDir='+${reversSortDir}}">PurchasePrice</a></th>
+                        <th scope="col"><a th:href="@{'/admin/products-table/page/'+ ${currentPage} +'/stock.quantity?sortDir='+${reversSortDir}}">Quantity</a></th>
+                        <th scope="col"><a th:href="@{'/admin/products-table/page/'+ ${currentPage} +'/stock.unitOfMeasurement?sortDir='+${reversSortDir}}">Unit</a></th>
+                        <th scope="col">Product Description</th>/
+                        <th scope="col"><a th:href="@{'/admin/products-table/page/'+ ${currentPage} +'/stock.supplier.supplierName?sortDir='+${reversSortDir}}">Supplier Name</a></th>
+                        <th scope="col">Edit/Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="prod, stat:${products}">
+                        <th scope="row" th:utext="${stat.index+1}">1</th>
+                        <td th:utext="${prod.getProductName()}">Mark</td>
+                        <td th:utext="${prod.getType().getTypeName()}">Mark</td>
+                        <!--                        <td th:utext="${prod.getProductDetails().getManufacturer()}">Mark</td>-->
+                        <td th:utext="${prod.getStock().getPurchasePrice()}">Mark</td>
+                        <td th:utext="${prod.getStock().getQuantity()}">Mark</td>
+                        <td th:utext="${prod.getStock().getUnitOfMeasurement()}">Mark</td>
+                        <td th:utext="${prod.getProductDetails().getProductDescription()}">Mark</td>
+                        <td th:utext="${prod.getStock().getSupplier().getSupplierName()}">Mark</td>
+                        <td>
+                            <div>
+                                <a style="display: inline-block" class="btn btn-primary"
+                                   th:href="@{'/product/'+'edit?id=' + ${prod.id}}">Edit</a>
+                                <div style="display: inline-block">
+                                    <form th:method="DELETE" th:action="@{/product/delete/{id}(id=${prod.id})}">
+                                        <input class="btn btn-danger" type="submit" value="Delete">
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <!--                    <tr>-->
+                    <!--                        <td colspan="3">aaa</td>-->
+                    <!--                    </tr>-->
+                </table>
+                <div>
+
+                    <nav aria-label="Page navigation example">
+                        <div style="align-items: start">Total items: [[${totalItems}]] &nbsp; &nbsp; : Page [[${currentPage}]] of
+                            [[${totalItems}]]
+                        </div>
+
+                        <ul class="pagination justify-content-center">
+
+                            <li class="page-item" th:classappend="${currentPage>1}?'':disabled">
+                                <a class="page-link"  th:href="@{/admin/products-table/page/1}">First</a>
+                            </li>
+                            <li class="page-item" th:classappend="${currentPage==1}?disabled">
+                                <a class="page-link" th:href="@{'/admin/products-table/page/'+${currentPage - 1}}">Previous</a>
+                            </li>
+                            <li class="page-item" th:each="i:${#numbers.sequence(1,totalPage)}" th:classappend="${currentPage==i}?disabled">
+                                <a class="page-link" th:href="@{'/admin/products-table/page/' + ${i} + '/' + ${field} +'?sortDir='+${sortDir}}">[[${i}]]</a>
+                            </li>
+
+                            <li class="page-item" th:classappend="${currentPage<totalPage}?'':disabled">
+                                <a class="page-link" th:href="@{'/admin/products-table/page/'+${currentPage+1}}">Next</a>
+                            </li>
+                            <li class="page-item " th:classappend="${currentPage==totalPage}?disabled">
+                                <a class="page-link"  th:href="@{'/admin/products-table/page/'+ ${totalPage}}">Last</a>
+
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+<!--                <div>-->
+
+<!--                    <nav aria-label="Page navigation example">-->
+<!--                        <div style="align-items: start">Total items: [[${totalItems}]] &nbsp; &nbsp; : Page [[${currentPage}]] of-->
+<!--                            [[${totalItems}]]-->
+<!--                        </div>-->
+
+<!--                        <ul class="pagination justify-content-center">-->
+
+<!--                            <li class="page-item" th:classappend="${currentPage>1}?'':disabled">-->
+<!--                                <a class="page-link"  th:href="@{/admin/products-table/page/1}">First</a>-->
+<!--                            </li>-->
+<!--                            <li class="page-item" th:classappend="${currentPage==1}?disabled">-->
+<!--                                <a class="page-link" th:href="@{'/admin/products-table/page/'+${currentPage - 1}}">Previous</a>-->
+<!--                            </li>-->
+<!--                            <li class="page-item" th:each="i:${#numbers.sequence(1,totalPage)}" th:classappend="${currentPage==i}?disabled">-->
+<!--                                <a class="page-link" th:href="@{'/admin/products-table/page/'+${i}}">[[${i}]]</a>-->
+<!--                            </li>-->
+
+<!--                            <li class="page-item" th:classappend="${currentPage<totalPage}?'':disabled">-->
+<!--                                <a class="page-link" th:href="@{'/admin/products-table/page/'+${currentPage+1}}">Next</a>-->
+<!--                            </li>-->
+<!--                            <li class="page-item " th:classappend="${currentPage==totalPage}?disabled">-->
+<!--                                <a class="page-link"  th:href="@{'/admin/products-table/page/'+ ${totalPage}}">Last</a>-->
+
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </nav>-->
+<!--                </div>-->
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

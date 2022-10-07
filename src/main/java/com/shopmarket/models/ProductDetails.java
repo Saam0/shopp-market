@@ -1,10 +1,16 @@
 package com.shopmarket.models;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+//@Data
+@Getter
+@Setter
+//@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "t_product_details")
 public class ProductDetails {

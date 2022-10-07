@@ -164,6 +164,13 @@
             <version>1.9.0</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>chart.js</artifactId>
+            <version>3.9.1</version>
+        </dependency>
+
 <!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.webjars/select2 &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>org.webjars</groupId>-->

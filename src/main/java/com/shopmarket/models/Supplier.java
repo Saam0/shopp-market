@@ -23,7 +23,7 @@ public class Supplier {
 
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "supplier", cascade = CascadeType.DETACH, orphanRemoval = true)
     private List<Stock> stocks = new ArrayList<>();
 
     public List<Stock> getStocks() {

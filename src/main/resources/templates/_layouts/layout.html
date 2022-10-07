@@ -16,41 +16,39 @@
     <link th:href="@{/webjars/slick-carousel/1.8.1/slick/slick.css} " rel="stylesheet" type="text/css">
     <link th:href="@{/css/font.css}" media="screen" rel="stylesheet" type="text/css">
     <link th:href="@{/css/iconfonts.css}" media="screen" rel="stylesheet" type="text/css">
-<!--    <link th:href="@{/css/style.css}" media="screen" rel="stylesheet" type="text/css">-->
+    <!--    <link th:href="@{/css/style.css}" media="screen" rel="stylesheet" type="text/css">-->
     <link th:href="@{/css/style_2.css}" media="screen" rel="stylesheet" type="text/css">
     <link th:href="@{/css/media.css}" media="screen" rel="stylesheet" type="text/css">
-
 
 
 </head>
 <body>
 
-<div layout:fragment="header">
+<div class="header" layout:fragment="header">
 
     <div th:replace="_layouts/fragments/header :: header"> This header content is going to be replaced.</div>
 
     <div th:replace="_layouts/fragments/menu :: menu"> This header content is going to be replaced.</div>
-<!--    <div th:replace="_layouts/fragments/carusel :: carusel"> This header content is going to be replaced.</div>-->
+    <!--    <div th:replace="_layouts/fragments/carusel :: carusel"> This header content is going to be replaced.</div>-->
 
 
-<!--    <div th:replace="_layouts/fragments/hamburger :: hamburger"> This header content is going to be replaced.</div>-->
-
-
-</div>
-
-<div layout:fragment="content">
-
-
+    <!--    <div th:replace="_layouts/fragments/hamburger :: hamburger"> This header content is going to be replaced.</div>-->
 
 
 </div>
 
-<div layout:fragment="footer">
-    <footer th:insert="_layouts/fragments/foooter :: footer" >
-<!--        <h1>This is the Layout's main section</h1>-->
+<div class="content" layout:fragment="content">
+
+
+</div>
+
+<div class="footer" layout:fragment="footer">
+    <footer th:insert="_layouts/fragments/foooter :: footer">
 
     </footer>
 </div>
+
+
 <script th:src="@{/webjars/jquery/3.6.0/dist/jquery.min.js}" type="text/javascript"></script>
 <script th:src="@{/webjars/slick-carousel/1.8.1/slick/slick.min.js}"></script>
 
@@ -65,7 +63,7 @@
 <script src="https://kit.fontawesome.com/e23fd2a944.js" crossorigin="anonymous"></script>
 
 <!--<script th:src="@{/js/main.js}"  type="text/javascript"></script>-->
-<script th:src="@{/js/main1.js}"  type="text/javascript"></script>
+<script th:src="@{/js/main1.js}" type="text/javascript"></script>
 
 
 <th:block layout:fragment="scripts">

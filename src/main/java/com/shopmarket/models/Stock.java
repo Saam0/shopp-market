@@ -33,7 +33,7 @@ public class Stock {
     private Product product;
 
     @Valid
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 

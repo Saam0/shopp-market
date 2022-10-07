@@ -10,7 +10,11 @@ import java.util.Optional;
 @Service
 public interface StockService {
     Stock save(Stock stock);
-    List<Stock> findByProductId(Product id);
+    Stock update(Stock stock, Long stockId);
+
+    void delete(Stock stock);
+
+    Optional<Stock> findByProduct(Product product);
     Optional<Stock> findById(Long id);
 
 }
